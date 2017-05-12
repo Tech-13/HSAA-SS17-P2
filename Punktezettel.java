@@ -12,7 +12,7 @@ public class Punktezettel extends JFrame {
     private final int big = 120;
 
     private JTable table;
-
+    private Würfelbecher w = new Würfelbecher(); 
     
     public Punktezettel() {
         table = new JTable(new SimpleTableModel());
@@ -43,204 +43,81 @@ public class Punktezettel extends JFrame {
         new Punktezettel();
     }
 
+    /**   Methode um Punkte einzutragen */    
+    public String eintragen(String Feld)
+    {
+        int Würfel1 = w.getWürfel1();
+        int Würfel2 = w.getWürfel2();
+        int Würfel3 = w.getWürfel3();
+        int Würfel4 = w.getWürfel4();
+        int Würfel5 = w.getWürfel5();
+        int Würfel6 = w.getWürfel6();
+        
+        int laenge = Feld.length();
+        int Punktzahl;
+        int p = 0;
+        int z;
+        if(laenge == 3){
+         StringBuilder builder = new StringBuilder(Feld.substring(0, 1));
+         int a = Integer.parseInt(builder.toString());        
+         
+        if(Würfel1 == a){p=p+a;}
+        if(Würfel2 == a){p=p+a;}
+        if(Würfel3 == a){p=p+a;}
+        if(Würfel4 == a){p=p+a;}
+        if(Würfel5 == a){p=p+a;}
+        if(Würfel6 == a){p=p+a;}        
+        
+       } 
+        //Eintragen der Punktzahl
+        switch (Feld) {
+            case "1er":  Punktzahl = p; z=1;
+                     break;
+            case "2er":  Punktzahl = p; z=2;
+                     break;
+            case "3er":  Punktzahl = p; z=3;
+                     break;
+            case "4er":  Punktzahl = p; z=4;
+                     break;
+            case "5er":  Punktzahl = p; z=5;
+                     break;
+            case "6er":  Punktzahl = p; z=6;
+                     break;
+            case "3er-Pasch":  Punktzahl = Würfel1 + Würfel2 + Würfel3 + Würfel4 + Würfel5 + Würfel6; z=11;
+                     break; 
+            case "4er-Pasch":  Punktzahl = Würfel1 + Würfel2 + Würfel3 + Würfel4 + Würfel5 + Würfel6; z=12; 
+                     break;
+            case "Full House":  Punktzahl = 25; z=13;
+                     break;
+            case "Kleine Straße":  Punktzahl = 30; z=14;
+                     break;
+            case "Große Straße":  Punktzahl = 40; z=15;
+                     break;
+            case "Kniffel":  Punktzahl = 50; z=16;
+                     break;
+            case "Chance":  Punktzahl = Würfel1 + Würfel2 + Würfel3 + Würfel4 + Würfel5 + Würfel6; z=17;
+                     break;                      
+            default: Punktzahl = -1;
+                     break;
+        }
+    
+        p=0;
+        System.out.println(Punktzahl);
+        return Feld;
+    } 
+    
+    /**
+     * An example of a method - replace this comment with your own
+     *
+     * @param  y  a sample parameter for a method
+     * @return    the sum of x and y
+     */
+    public int sampleMethod()
+    {
+        int Würfel1 = w.getWürfel1();
+        System.out.println(Würfel1);
+        return Würfel1;
+    }
+
 }
 
-class SimpleTableModel extends DefaultTableModel {
-
-    private int rows = 21, cols = 5;
-    int i;
-   
-    private Object[] rowData = new Object[cols];
-    
-
-    
-    public SimpleTableModel() {
-        super();
-        initModelData();
-    }
-
-    private void initModelData() {
-        int Zeile;
-
-        
-        /**"Erkennen" der Zeile
-        switch (Feld) {
-            case "1er":  Zeile = 1;
-                     break;
-            case "2er":  Zeile = 2;
-                     break;
-            case "3er":  Zeile = 3;
-                     break;
-            case "4er":  Zeile = 4;
-                     break;
-            case "5er":  Zeile = 5;
-                     break;
-            case "6er":  Zeile = 6;
-                     break;
-            case "3er-Pasch":  Zeile =10; 
-                     break; 
-            case "4er-Pasch":  Zeile =11; 
-                     break;
-            case "Full House":  Zeile =12; 
-                     break;
-            case "Kleine Straße":  Zeile =13;
-                     break;
-            case "Große Straße":  Zeile =14; 
-                     break;
-            case "Kniffel":  Zeile = 15;
-                     break;
-            case "Chance":  Zeile =16; 
-                     break;                      
-            default: Zeile = -1;
-                     break;
-        }
-        */
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        //Spieleranzahl
-        for (int i = 0; i < cols; i++) {
-            this.addColumn(i + "Spieler");
-        }
-
-
-        //1er-6er
-         for (int j = 0; j < 6; j++) {
-            for (int i = 0; i < 1; i++) {
-                rowData[i] = j+1 + "er";
-            }
-            this.addRow(rowData);
-        }       
-        //gesamt
-         for (int j = 6; j < 7; j++) {
-            for (int i = 0; i < 1; i++) {
-                rowData[i] = "gesamt";
-            }
-            this.addRow(rowData);
-        }         
-        //Bonus
-         for (int j = 7; j < 8; j++) {
-            for (int i = 0; i < 1; i++) {
-                rowData[i] = "Bonus bei 63 oder mehr";
-            }
-            this.addRow(rowData);
-        }        
-        //gesamt
-         for (int j = 8; j < 9; j++) {
-            for (int i = 0; i < 1; i++) {
-                rowData[i] = "gesamt oberer Teil";
-            }
-            this.addRow(rowData);
-        }        
-        //Leerzeichen
-         for (int j = 9; j < 10; j++) {
-            for (int i = 0; i < 1; i++) {
-                rowData[i] = "";
-            }
-            this.addRow(rowData);
-        }        
-        //Dreierpasch
-         for (int j = 10; j < 11; j++) {
-            for (int i = 0; i < 1; i++) {
-                rowData[i] = "Dreierpasch";
-            }
-            this.addRow(rowData);
-        }         
-        //Viererpasch
-         for (int j = 11; j < 12; j++) {
-            for (int i = 0; i < 1; i++) {
-                rowData[i] = "Viererpasch";
-            }
-            this.addRow(rowData);
-        }        
-        //Full House
-         for (int j = 12; j < 13; j++) {
-            for (int i = 0; i < 1; i++) {
-                rowData[i] = "Full House";
-            }
-            this.addRow(rowData);
-        }        
-        //Kleine Straße
-         for (int j = 13; j < 14; j++) {
-            for (int i = 0; i < 1; i++) {
-                rowData[i] = "Kleine Straße";
-            }
-            this.addRow(rowData);
-        }        
-        //Große Straße
-         for (int j = 14; j < 15; j++) {
-            for (int i = 0; i < 1; i++) {
-                rowData[i] = "Große Straße";
-            }
-            this.addRow(rowData);
-        }        
-        //Kniffel
-         for (int j = 15; j < 16; j++) {
-            for (int i = 0; i < 1; i++) {
-                rowData[i] = "Kniffel";
-            }
-            this.addRow(rowData);
-        }         
-        //Chance
-         for (int j = 16; j < 17; j++) {
-            for (int i = 0; i < 1; i++) {
-                rowData[i] = "Chance";
-            }
-            this.addRow(rowData);
-        }          
-        //gesamt unten
-         for (int j = 17; j < 18; j++) {
-            for (int i = 0; i < 1; i++) {
-                rowData[i] = "gesamt unterer Teil";
-            }
-            this.addRow(rowData);
-        }        
-        //gesamt oben
-         for (int j = 18; j < 19; j++) {
-            for (int i = 0; i < 1; i++) {
-                rowData[i] = "gesamt oberer Teil";
-            }
-            this.addRow(rowData);
-        }            
-        //Endsumme
-         for (int j = 19; j < 20; j++) {
-            for (int i = 0; i < 1; i++) {
-                rowData[i] = "Endsumme";
-            }
-            this.addRow(rowData);
-        }        
-        
-        
-        
-        
-
-        
-        
-    }
-} 
