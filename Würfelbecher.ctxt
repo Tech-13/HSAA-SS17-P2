@@ -22,7 +22,6 @@ comment16.target=java.lang.String\ eintragen(java.lang.String)
 comment16.text=Methode\ um\ Punkte\ einzutragen
 comment2.params=
 comment2.target=void\ w\u00FCrfeln()
-comment2.text=Methode\ um\ zu\ W\u00FCrfeln
 comment3.params=
 comment3.target=boolean\ W\u00FCrfel_1_markieren()
 comment3.text=Methoden\ um\ einzelne\ W\u00FCrfel\ \ anzumarkieren

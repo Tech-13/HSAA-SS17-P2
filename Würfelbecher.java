@@ -12,6 +12,8 @@ public class Würfelbecher
     private boolean Würfel1b;    private boolean Würfel2b;    private boolean  Würfel3b;    private boolean  Würfel4b;    private boolean  Würfel5b;    private boolean  Würfel6b;
     private int Punktzahl;
     int p = 0;
+
+
     /**
      * Constructor for objects of class Würfelbecher
      */
@@ -21,7 +23,6 @@ public class Würfelbecher
        
     }
 
-    /**   Methode um zu Würfeln   */ 
     public void würfeln()
     {
         // put your code here
@@ -82,10 +83,11 @@ public class Würfelbecher
     /**   Methode um Punkte einzutragen */    
     public String eintragen(String Feld)
     {
-        
-        StringBuilder builder = new StringBuilder(Feld.substring(0, 1));
-        int a = Integer.parseInt(builder.toString());        
-        
+        int laenge = Feld.length();
+        if(laenge == 3){
+         StringBuilder builder = new StringBuilder(Feld.substring(0, 1));
+         int a = Integer.parseInt(builder.toString());        
+         
         if(Würfel1 == a){p=p+a;}
         if(Würfel2 == a){p=p+a;}
         if(Würfel3 == a){p=p+a;}
@@ -93,7 +95,7 @@ public class Würfelbecher
         if(Würfel5 == a){p=p+a;}
         if(Würfel6 == a){p=p+a;}        
         
-        
+    } 
         //Eintragen der Punktzahl
         switch (Feld) {
             case "1er":  Punktzahl = p;
@@ -108,17 +110,15 @@ public class Würfelbecher
                      break;
             case "6er":  Punktzahl = p;
                      break;
-            case "Pasch":  Punktzahl = Würfel1 + Würfel2 + Würfel3 + Würfel4 + Würfel5 + Würfel6;
-                     break;
             case "3er-Pasch":  Punktzahl = Würfel1 + Würfel2 + Würfel3 + Würfel4 + Würfel5 + Würfel6;
                      break; 
             case "4er-Pasch":  Punktzahl = Würfel1 + Würfel2 + Würfel3 + Würfel4 + Würfel5 + Würfel6;
                      break;
+            case "Full House":  Punktzahl = 25;
+                     break;
             case "Kleine Straße":  Punktzahl = 30;
                      break;
             case "Große Straße":  Punktzahl = 40;
-                     break;
-            case "Full House":  Punktzahl = 25;
                      break;
             case "Kniffel":  Punktzahl = 50;
                      break;
@@ -127,13 +127,15 @@ public class Würfelbecher
             default: Punktzahl = -1;
                      break;
         }
+    
         
+       String x = Feld; 
        p=0;
-        
+
         System.out.println(Punktzahl);
         return Feld;
     }    
-        
+   
        
 
         

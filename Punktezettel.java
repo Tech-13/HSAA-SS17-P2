@@ -13,6 +13,7 @@ public class Punktezettel extends JFrame {
 
     private JTable table;
 
+    
     public Punktezettel() {
         table = new JTable(new SimpleTableModel());
         setColumnWidth();
@@ -48,16 +49,82 @@ class SimpleTableModel extends DefaultTableModel {
 
     private int rows = 21, cols = 5;
     int i;
-    
+   
     private Object[] rowData = new Object[cols];
+    
 
+    
     public SimpleTableModel() {
         super();
         initModelData();
     }
 
     private void initModelData() {
+        int Zeile;
+
         
+        /**"Erkennen" der Zeile
+        switch (Feld) {
+            case "1er":  Zeile = 1;
+                     break;
+            case "2er":  Zeile = 2;
+                     break;
+            case "3er":  Zeile = 3;
+                     break;
+            case "4er":  Zeile = 4;
+                     break;
+            case "5er":  Zeile = 5;
+                     break;
+            case "6er":  Zeile = 6;
+                     break;
+            case "3er-Pasch":  Zeile =10; 
+                     break; 
+            case "4er-Pasch":  Zeile =11; 
+                     break;
+            case "Full House":  Zeile =12; 
+                     break;
+            case "Kleine Straße":  Zeile =13;
+                     break;
+            case "Große Straße":  Zeile =14; 
+                     break;
+            case "Kniffel":  Zeile = 15;
+                     break;
+            case "Chance":  Zeile =16; 
+                     break;                      
+            default: Zeile = -1;
+                     break;
+        }
+        */
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        //Spieleranzahl
         for (int i = 0; i < cols; i++) {
             this.addColumn(i + "Spieler");
         }
