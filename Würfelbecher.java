@@ -114,14 +114,16 @@ public class Würfelbecher
                      break; 
             case "4er-Pasch":  Punktzahl = Würfel1 + Würfel2 + Würfel3 + Würfel4 + Würfel5 + Würfel6;
                      break;
-            case "Kleine Straße":  Punktzahl = 35;
+            case "Kleine Straße":  Punktzahl = 30;
                      break;
-            case "Große Straße":  Punktzahl = 45;
+            case "Große Straße":  Punktzahl = 40;
                      break;
-            case "Full House":  Punktzahl = 40;
+            case "Full House":  Punktzahl = 25;
                      break;
-            case "Kniffel":  Punktzahl = 75;
-                     break;          
+            case "Kniffel":  Punktzahl = 50;
+                     break;
+            case "Chance":  Punktzahl = Würfel1 + Würfel2 + Würfel3 + Würfel4 + Würfel5 + Würfel6;
+                     break;                      
             default: Punktzahl = -1;
                      break;
         }
