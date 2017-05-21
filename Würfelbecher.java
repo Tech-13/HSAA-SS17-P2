@@ -7,8 +7,7 @@ import java.util.*;
  */
 public class Würfelbecher
 {
-    // instance variables - replace the example below with your own
-    private int Würfel1;    private int Würfel2;    private int Würfel3;    private int Würfel4;    private int Würfel5;    private int Würfel6;
+    private byte[] würfel;
     private boolean Würfel1b;    private boolean Würfel2b;    private boolean  Würfel3b;    private boolean  Würfel4b;    private boolean  Würfel5b;    private boolean  Würfel6b;
     private int Punktzahl;
     int p = 0;
@@ -20,21 +19,20 @@ public class Würfelbecher
      */
     public Würfelbecher()
     {
-        // initialise instance variables
+        würfel = new byte[6];
        
     }
 
     public void würfeln()
     {
-        // put your code here
-        if(Würfel1b == false){Würfel1 = (int)((Math.random()*6)+1);}    else{Würfel1 = Würfel1;}
-        if(Würfel2b == false){Würfel2 = (int)((Math.random()*6)+1);}    else{Würfel2 = Würfel2;}
-        if(Würfel3b == false){Würfel3 = (int)((Math.random()*6)+1);}    else{Würfel3 = Würfel3;}
-        if(Würfel4b == false){Würfel4 = (int)((Math.random()*6)+1);}    else{Würfel4 = Würfel4;}
-        if(Würfel5b == false){Würfel5 = (int)((Math.random()*6)+1);}    else{Würfel5 = Würfel5;}
-        if(Würfel6b == false){Würfel6 = (int)((Math.random()*6)+1);}    else{Würfel6 = Würfel6;}
+        if(Würfel1b == false){würfel[0] = (byte)((Math.random()*6)+1);}    else{würfel[0] = würfel[0];}
+        if(Würfel2b == false){würfel[1] = (byte)((Math.random()*6)+1);}    else{würfel[1] = würfel[1];}
+        if(Würfel3b == false){würfel[2] = (byte)((Math.random()*6)+1);}    else{würfel[2] = würfel[2];}
+        if(Würfel4b == false){würfel[3] = (byte)((Math.random()*6)+1);}    else{würfel[3] = würfel[3];}
+        if(Würfel5b == false){würfel[4] = (byte)((Math.random()*6)+1);}    else{würfel[4] = würfel[4];}
+        if(Würfel6b == false){würfel[5] = (byte)((Math.random()*6)+1);}    else{würfel[5] = würfel[5];}
         
-        System.out.println(Würfel1+" "+Würfel2+" "+Würfel3+" "+ Würfel4+" "+Würfel5+" "+Würfel6+" ");
+        System.out.println(würfel[0]+" "+würfel[1]+" "+würfel[2]+" "+ würfel[3]+" "+würfel[4]+" "+würfel[5]+" ");
         return;      
     }
      
@@ -102,12 +100,12 @@ public class Würfelbecher
          StringBuilder builder = new StringBuilder(Feld.substring(0, 1));
          int a = Integer.parseInt(builder.toString());        
          
-        if(Würfel1 == a){p=p+a;}
-        if(Würfel2 == a){p=p+a;}
-        if(Würfel3 == a){p=p+a;}
-        if(Würfel4 == a){p=p+a;}
-        if(Würfel5 == a){p=p+a;}
-        if(Würfel6 == a){p=p+a;}        
+        if(würfel[0] == a){p=p+a;}
+        if(würfel[1] == a){p=p+a;}
+        if(würfel[2] == a){p=p+a;}
+        if(würfel[3] == a){p=p+a;}
+        if(würfel[4] == a){p=p+a;}
+        if(würfel[5] == a){p=p+a;}        
         
        } 
         //Eintragen der Punktzahl
@@ -124,9 +122,9 @@ public class Würfelbecher
                      break;
             case "6er":  Punktzahl = p; z=6;
                      break;
-            case "3er-Pasch":  Punktzahl = Würfel1 + Würfel2 + Würfel3 + Würfel4 + Würfel5 + Würfel6; z=11;
+            case "3er-Pasch":  for (byte i = 0; i < würfel.length; i++){Punktzahl += würfel[i];} z=11;
                      break; 
-            case "4er-Pasch":  Punktzahl = Würfel1 + Würfel2 + Würfel3 + Würfel4 + Würfel5 + Würfel6; z=12; 
+            case "4er-Pasch":  for (byte i = 0; i < würfel.length; i++){Punktzahl += würfel[i];} z=12; 
                      break;
             case "Full House":  Punktzahl = 25; z=13;
                      break;
@@ -136,7 +134,7 @@ public class Würfelbecher
                      break;
             case "Kniffel":  Punktzahl = 50; z=16;
                      break;
-            case "Chance":  Punktzahl = Würfel1 + Würfel2 + Würfel3 + Würfel4 + Würfel5 + Würfel6; z=17;
+            case "Chance":  for (byte i = 0; i < würfel.length; i++){Punktzahl += würfel[i];} z=17;
                      break;                      
             default: Punktzahl = -1;
                      break;
@@ -152,12 +150,12 @@ public class Würfelbecher
         return Punktzahl;
     }    
     
-    public int getWürfel1(){return Würfel1;}  
-    public int getWürfel2(){return Würfel2;}
-    public int getWürfel3(){return Würfel3;}
-    public int getWürfel4(){return Würfel4;}
-    public int getWürfel5(){return Würfel5;}
-    public int getWürfel6(){return Würfel6;}
+    public int getWürfel1(){return würfel[0];}  
+    public int getWürfel2(){return würfel[1];}
+    public int getWürfel3(){return würfel[2];}
+    public int getWürfel4(){return würfel[3];}
+    public int getWürfel5(){return würfel[4];}
+    public int getWürfel6(){return würfel[5];}
     
 
 
