@@ -44,61 +44,61 @@ public class Punktezettel extends JFrame {
     }
 
     /**   Methode um Punkte einzutragen */    
-    public String eintragen(String Feld)
+    public String eintragen(String feld)
     {
-        int Würfel0 = w.getWürfel0();
-        int Würfel1 = w.getWürfel1();
-        int Würfel2 = w.getWürfel2();
-        int Würfel3 = w.getWürfel3();
-        int Würfel4 = w.getWürfel4();
-        int laenge = Feld.length();
-        int Punktzahl;
+        int würfel0 = w.getWürfel0();
+        int würfel1 = w.getWürfel1();
+        int würfel2 = w.getWürfel2();
+        int würfel3 = w.getWürfel3();
+        int würfel4 = w.getWürfel4();
+        int laenge = feld.length();
+        int punktzahl;
         int p = 0;
         int z;
         if(laenge == 3){
-         StringBuilder builder = new StringBuilder(Feld.substring(0, 1));
+         StringBuilder builder = new StringBuilder(feld.substring(0, 1));
          int a = Integer.parseInt(builder.toString());        
          
-        if(Würfel0 == a){p=p+a;}
-        if(Würfel1 == a){p=p+a;}
-        if(Würfel2 == a){p=p+a;}
-        if(Würfel3 == a){p=p+a;}
-        if(Würfel4 == a){p=p+a;}        
+        if(würfel0 == a){p=p+a;}
+        if(würfel1 == a){p=p+a;}
+        if(würfel2 == a){p=p+a;}
+        if(würfel3 == a){p=p+a;}
+        if(würfel4 == a){p=p+a;}        
         
        } 
         //Eintragen der Punktzahl
-        switch (Feld) {
-            case "1er":  Punktzahl = p; z=1;
+        switch (feld) {
+            case "1er":  punktzahl = p; z=1;
                      break;
-            case "2er":  Punktzahl = p; z=2;
+            case "2er":  punktzahl = p; z=2;
                      break;
-            case "3er":  Punktzahl = p; z=3;
+            case "3er":  punktzahl = p; z=3;
                      break;
-            case "4er":  Punktzahl = p; z=4;
+            case "4er":  punktzahl = p; z=4;
                      break;
-            case "5er":  Punktzahl = p; z=5;
+            case "5er":  punktzahl = p; z=5;
                      break;
-            case "3er-Pasch":  Punktzahl = Würfel0 + Würfel1 + Würfel2 + Würfel3 + Würfel4; z=11;
+            case "3er-Pasch":  punktzahl = würfel0 + würfel1 + würfel2 + würfel3 + würfel4; z=11;
                      break; 
-            case "4er-Pasch":  Punktzahl = Würfel0 + Würfel1 + Würfel2 + Würfel3 + Würfel4; z=12; 
+            case "4er-Pasch":  punktzahl = würfel0 + würfel1 + würfel2 + würfel3 + würfel4; z=12; 
                      break;
-            case "Full House":  Punktzahl = 25; z=13;
+            case "Full House":  punktzahl = 25; z=13;
                      break;
-            case "Kleine Straße":  Punktzahl = 30; z=14;
+            case "Kleine Straße":  punktzahl = 30; z=14;
                      break;
-            case "Große Straße":  Punktzahl = 40; z=15;
+            case "Große Straße":  punktzahl = 40; z=15;
                      break;
-            case "Kniffel":  Punktzahl = 50; z=16;
+            case "Kniffel":  punktzahl = 50; z=16;
                      break;
-            case "Chance":  Punktzahl = Würfel0 + Würfel1 + Würfel2 + Würfel3 + Würfel4; z=17;
+            case "Chance":  punktzahl = würfel0 + würfel1 + würfel2 + würfel3 + würfel4; z=17;
                      break;                      
-            default: Punktzahl = -1;
+            default: punktzahl = -1;
                      break;
         }
     
         p=0;
-        System.out.println(Punktzahl);
-        return Feld;
+        System.out.println(punktzahl);
+        return feld;
     } 
     
     /**

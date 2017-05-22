@@ -5,8 +5,8 @@ import java.util.*;
 public class Würfelbecher
 {
     private byte[] würfel;
-    private boolean Würfel0b;    private boolean Würfel1b;    private boolean  Würfel2b;    private boolean  Würfel3b;    private boolean  Würfel4b;
-    private int Punktzahl;
+    private boolean würfel0b;    private boolean würfel1b;    private boolean  würfel2b;    private boolean  würfel3b;    private boolean  würfel4b;
+    private int punktzahl;
     int p = 0;
     int z;
     String x;
@@ -22,11 +22,11 @@ public class Würfelbecher
 
     public void würfeln()
     {
-        if(Würfel0b == false){würfel[0] = (byte)((Math.random()*6)+1);}    else{würfel[0] = würfel[0];}
-        if(Würfel1b == false){würfel[1] = (byte)((Math.random()*6)+1);}    else{würfel[1] = würfel[1];}
-        if(Würfel2b == false){würfel[2] = (byte)((Math.random()*6)+1);}    else{würfel[2] = würfel[2];}
-        if(Würfel3b == false){würfel[3] = (byte)((Math.random()*6)+1);}    else{würfel[3] = würfel[3];}
-        if(Würfel4b == false){würfel[4] = (byte)((Math.random()*6)+1);}    else{würfel[4] = würfel[4];}
+        if(würfel0b == false){würfel[0] = (byte)((Math.random()*6)+1);}    else{würfel[0] = würfel[0];}
+        if(würfel1b == false){würfel[1] = (byte)((Math.random()*6)+1);}    else{würfel[1] = würfel[1];}
+        if(würfel2b == false){würfel[2] = (byte)((Math.random()*6)+1);}    else{würfel[2] = würfel[2];}
+        if(würfel3b == false){würfel[3] = (byte)((Math.random()*6)+1);}    else{würfel[3] = würfel[3];}
+        if(würfel4b == false){würfel[4] = (byte)((Math.random()*6)+1);}    else{würfel[4] = würfel[4];}
         
         System.out.println(würfel[0]+" "+würfel[1]+" "+würfel[2]+" "+ würfel[3]+" "+würfel[4]+" ");
         return;      
@@ -52,43 +52,43 @@ public class Würfelbecher
     /**
      * 
      */
-    public int Würfel_markieren(int Würfel)
+    public int würfelMarkieren(int würfel)
     {
-                switch (Würfel) {
-            case 1:  if(Würfel0b == true){Würfel0b = false;} else {Würfel0b = true;}
+                switch (würfel) {
+            case 1:  if(würfel0b == true){würfel0b = false;} else {würfel0b = true;}
                      break;
-            case 2:  if(Würfel1b == true){Würfel0b = false;} else {Würfel1b = true;}
+            case 2:  if(würfel1b == true){würfel0b = false;} else {würfel1b = true;}
                      break;
-            case 3:  if(Würfel2b == true){Würfel0b = false;} else {Würfel2b = true;}
+            case 3:  if(würfel2b == true){würfel0b = false;} else {würfel2b = true;}
                      break;
-            case 4:  if(Würfel3b == true){Würfel0b = false;} else {Würfel3b = true;}
+            case 4:  if(würfel3b == true){würfel0b = false;} else {würfel3b = true;}
                      break;
-            case 5:  if(Würfel4b == true){Würfel0b = false;} else {Würfel4b = true;} 
+            case 5:  if(würfel4b == true){würfel0b = false;} else {würfel4b = true;} 
                      break;
             default: System.out.println("Fehler");
                      break;
         }
-        return Würfel;
+        return würfel;
     }
 
     
 
     
     /**   Methoden um alle Würfel  abzumarkieren */ 
-    public boolean Alle_Würfel_abmarkieren()
-    { Würfel0b = false; Würfel1b = false; Würfel2b = false; Würfel3b = false; Würfel4b = false; 
-      return Würfel0b &&  Würfel1b && Würfel2b && Würfel3b && Würfel4b;}  
+    public boolean alleWürfelAbmarkieren()
+    { würfel0b = false; würfel1b = false; würfel2b = false; würfel3b = false; würfel4b = false; 
+      return würfel0b &&  würfel1b && würfel2b && würfel3b && würfel4b;}  
     
 
     
     
     /**   Methode um Punkte einzutragen */    
-    public String eintragen(String Feld)
+    public String eintragen(String feld)
     {
-        int laenge = Feld.length();
+        int laenge = feld.length();
         
         if(laenge == 3){
-         StringBuilder builder = new StringBuilder(Feld.substring(0, 1));
+         StringBuilder builder = new StringBuilder(feld.substring(0, 1));
          int a = Integer.parseInt(builder.toString());        
          
         if(würfel[0] == a){p=p+a;}
@@ -99,43 +99,43 @@ public class Würfelbecher
         
        } 
         //Eintragen der Punktzahl
-        switch (Feld) {
-            case "1er":  Punktzahl = p; z=1;
+        switch (feld) {
+            case "1er":  punktzahl = p; z=1;
                      break;
-            case "2er":  Punktzahl = p; z=2;
+            case "2er":  punktzahl = p; z=2;
                      break;
-            case "3er":  Punktzahl = p; z=3;
+            case "3er":  punktzahl = p; z=3;
                      break;
-            case "4er":  Punktzahl = p; z=4;
+            case "4er":  punktzahl = p; z=4;
                      break;
-            case "5er":  Punktzahl = p; z=5;
+            case "5er":  punktzahl = p; z=5;
                      break;
-            case "3er-Pasch":  for (byte i = 0; i < würfel.length; i++){Punktzahl += würfel[i];} z=11;
+            case "3er-Pasch":  for (byte i = 0; i < würfel.length; i++){punktzahl += würfel[i];} z=11;
                      break; 
-            case "4er-Pasch":  for (byte i = 0; i < würfel.length; i++){Punktzahl += würfel[i];} z=12; 
+            case "4er-Pasch":  for (byte i = 0; i < würfel.length; i++){punktzahl += würfel[i];} z=12; 
                      break;
-            case "Full House":  Punktzahl = 25; z=13;
+            case "Full House":  punktzahl = 25; z=13;
                      break;
-            case "Kleine Straße":  Punktzahl = 30; z=14;
+            case "Kleine Straße":  punktzahl = 30; z=14;
                      break;
-            case "Große Straße":  Punktzahl = 40; z=15;
+            case "Große Straße":  punktzahl = 40; z=15;
                      break;
-            case "Kniffel":  Punktzahl = 50; z=16;
+            case "Kniffel":  punktzahl = 50; z=16;
                      break;
-            case "Chance":  for (byte i = 0; i < würfel.length; i++){Punktzahl += würfel[i];} z=17;
+            case "Chance":  for (byte i = 0; i < würfel.length; i++){punktzahl += würfel[i];} z=17;
                      break;                      
-            default: Punktzahl = -1;
+            default: punktzahl = -1;
                      break;
         }
     
         p=0;
-        System.out.println(Punktzahl);
-        return Feld;
+        System.out.println(punktzahl);
+        return feld;
     }    
    
     public int getPunktzahl(){
-      System.out.println(Punktzahl);
-        return Punktzahl;
+      System.out.println(punktzahl);
+        return punktzahl;
     }    
     
     public int getWürfel0(){return würfel[0];}  
