@@ -5,7 +5,7 @@ import java.util.*;
 public class Würfelbecher
 {
     private byte[] würfel;
-    private boolean würfel0b;    private boolean würfel1b;    private boolean  würfel2b;    private boolean  würfel3b;    private boolean  würfel4b;
+    private boolean[]würfelb;
     private int punktzahl;
     int p = 0;
     int z;
@@ -17,16 +17,17 @@ public class Würfelbecher
     public Würfelbecher()
     {
         würfel = new byte[5];
+        würfelb = new boolean[5];
        
     }
 
     public void würfeln()
     {
-        if(würfel0b == false){würfel[0] = (byte)((Math.random()*6)+1);}    else{würfel[0] = würfel[0];}
-        if(würfel1b == false){würfel[1] = (byte)((Math.random()*6)+1);}    else{würfel[1] = würfel[1];}
-        if(würfel2b == false){würfel[2] = (byte)((Math.random()*6)+1);}    else{würfel[2] = würfel[2];}
-        if(würfel3b == false){würfel[3] = (byte)((Math.random()*6)+1);}    else{würfel[3] = würfel[3];}
-        if(würfel4b == false){würfel[4] = (byte)((Math.random()*6)+1);}    else{würfel[4] = würfel[4];}
+        if(würfelb[0] == false){würfel[0] = (byte)((Math.random()*6)+1);}    else{würfel[0] = würfel[0];}
+        if(würfelb[1] == false){würfel[1] = (byte)((Math.random()*6)+1);}    else{würfel[1] = würfel[1];}
+        if(würfelb[2] == false){würfel[2] = (byte)((Math.random()*6)+1);}    else{würfel[2] = würfel[2];}
+        if(würfelb[3] == false){würfel[3] = (byte)((Math.random()*6)+1);}    else{würfel[3] = würfel[3];}
+        if(würfelb[4] == false){würfel[4] = (byte)((Math.random()*6)+1);}    else{würfel[4] = würfel[4];}
         
         System.out.println(würfel[0]+" "+würfel[1]+" "+würfel[2]+" "+ würfel[3]+" "+würfel[4]+" ");
         return;      
@@ -55,15 +56,15 @@ public class Würfelbecher
     public int würfelMarkieren(int würfel)
     {
                 switch (würfel) {
-            case 1:  if(würfel0b == true){würfel0b = false;} else {würfel0b = true;}
+            case 1:  if(würfelb[0] == true){würfelb[0] = false;} else {würfelb[0] = true;}
                      break;
-            case 2:  if(würfel1b == true){würfel0b = false;} else {würfel1b = true;}
+            case 2:  if(würfelb[1] == true){würfelb[0] = false;} else {würfelb[1] = true;}
                      break;
-            case 3:  if(würfel2b == true){würfel0b = false;} else {würfel2b = true;}
+            case 3:  if(würfelb[2] == true){würfelb[0] = false;} else {würfelb[2] = true;}
                      break;
-            case 4:  if(würfel3b == true){würfel0b = false;} else {würfel3b = true;}
+            case 4:  if(würfelb[3] == true){würfelb[0] = false;} else {würfelb[3] = true;}
                      break;
-            case 5:  if(würfel4b == true){würfel0b = false;} else {würfel4b = true;} 
+            case 5:  if(würfelb[4] == true){würfelb[0] = false;} else {würfelb[4] = true;} 
                      break;
             default: System.out.println("Fehler");
                      break;
@@ -76,8 +77,8 @@ public class Würfelbecher
     
     /**   Methoden um alle Würfel  abzumarkieren */ 
     public boolean alleWürfelAbmarkieren()
-    { würfel0b = false; würfel1b = false; würfel2b = false; würfel3b = false; würfel4b = false; 
-      return würfel0b &&  würfel1b && würfel2b && würfel3b && würfel4b;}  
+    { würfelb[0] = false; würfelb[1] = false; würfelb[2] = false; würfelb[3] = false; würfelb[4] = false; 
+      return würfelb[0] &&  würfelb[1] && würfelb[2] && würfelb[3] && würfelb[4];}  
     
 
     
