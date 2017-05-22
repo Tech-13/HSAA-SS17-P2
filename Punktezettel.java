@@ -46,13 +46,11 @@ public class Punktezettel extends JFrame {
     /**   Methode um Punkte einzutragen */    
     public String eintragen(String Feld)
     {
+        int Würfel0 = w.getWürfel0();
         int Würfel1 = w.getWürfel1();
         int Würfel2 = w.getWürfel2();
         int Würfel3 = w.getWürfel3();
         int Würfel4 = w.getWürfel4();
-        int Würfel5 = w.getWürfel5();
-        int Würfel6 = w.getWürfel6();
-        
         int laenge = Feld.length();
         int Punktzahl;
         int p = 0;
@@ -61,12 +59,11 @@ public class Punktezettel extends JFrame {
          StringBuilder builder = new StringBuilder(Feld.substring(0, 1));
          int a = Integer.parseInt(builder.toString());        
          
+        if(Würfel0 == a){p=p+a;}
         if(Würfel1 == a){p=p+a;}
         if(Würfel2 == a){p=p+a;}
         if(Würfel3 == a){p=p+a;}
-        if(Würfel4 == a){p=p+a;}
-        if(Würfel5 == a){p=p+a;}
-        if(Würfel6 == a){p=p+a;}        
+        if(Würfel4 == a){p=p+a;}        
         
        } 
         //Eintragen der Punktzahl
@@ -81,11 +78,9 @@ public class Punktezettel extends JFrame {
                      break;
             case "5er":  Punktzahl = p; z=5;
                      break;
-            case "6er":  Punktzahl = p; z=6;
-                     break;
-            case "3er-Pasch":  Punktzahl = Würfel1 + Würfel2 + Würfel3 + Würfel4 + Würfel5 + Würfel6; z=11;
+            case "3er-Pasch":  Punktzahl = Würfel0 + Würfel1 + Würfel2 + Würfel3 + Würfel4; z=11;
                      break; 
-            case "4er-Pasch":  Punktzahl = Würfel1 + Würfel2 + Würfel3 + Würfel4 + Würfel5 + Würfel6; z=12; 
+            case "4er-Pasch":  Punktzahl = Würfel0 + Würfel1 + Würfel2 + Würfel3 + Würfel4; z=12; 
                      break;
             case "Full House":  Punktzahl = 25; z=13;
                      break;
@@ -95,7 +90,7 @@ public class Punktezettel extends JFrame {
                      break;
             case "Kniffel":  Punktzahl = 50; z=16;
                      break;
-            case "Chance":  Punktzahl = Würfel1 + Würfel2 + Würfel3 + Würfel4 + Würfel5 + Würfel6; z=17;
+            case "Chance":  Punktzahl = Würfel0 + Würfel1 + Würfel2 + Würfel3 + Würfel4; z=17;
                      break;                      
             default: Punktzahl = -1;
                      break;
@@ -107,10 +102,7 @@ public class Punktezettel extends JFrame {
     } 
     
     /**
-     * An example of a method - replace this comment with your own
      *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
      */
     public int sampleMethod()
     {
