@@ -103,16 +103,8 @@ public class Punktezettel extends JFrame {
         System.out.println(punktzahl);
         return feld;
     } 
-    
-    /**
-     *
-     */
-    public int sampleMethod()
-    {
-        int Würfel1 = w.getWürfel1();
-        System.out.println(Würfel1);
-        return Würfel1;
-    }
+
+
 
 }
 

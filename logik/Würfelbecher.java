@@ -136,21 +136,16 @@ public class Würfelbecher
         return feld;
     }    
    
-    public int getPunktzahl(){
-      System.out.println(punktzahl);
-        return punktzahl;
-    }    
+    public int getWürfel(int nr) {
+    	if (nr >= 0 && nr < würfel.length)
+    		return würfel[nr];
+    	else
+    		return -1;
+    }
     
-    public int getWürfel0(){return würfel[0];}  
-    public int getWürfel1(){return würfel[1];}
-    public int getWürfel2(){return würfel[2];}
-    public int getWürfel3(){return würfel[3];}
-    public int getWürfel4(){return würfel[4];}
-    
-    
-
-
-
+    public byte[] getAlleWürfel() {
+    	return würfel;
+    }
         
         
 }
