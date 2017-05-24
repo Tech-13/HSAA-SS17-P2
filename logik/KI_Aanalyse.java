@@ -1,3 +1,4 @@
+package logik;
 
 /**
  * Beschreiben Sie hier die Klasse KI_Aanalyse.

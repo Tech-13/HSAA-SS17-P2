@@ -1,3 +1,4 @@
+package logik;
 /**
  * Mit der Klasse Spieler kann für jeden am Spiel teilnehmenden Spieler ein Objekt erzeugt werden, 
  * in dem Daten wie Name und Aktivität gespeichert werden, und das die entsprechenden Methoden bereitstellt.

@@ -1,3 +1,5 @@
+package logik;
+
 import java.util.*;
 /**
  * Write a description of class Würfelbecher here.

@@ -1,3 +1,4 @@
+package gui;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -5,6 +6,8 @@ import java.util.Vector;
 
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+
+import logik.Würfelbecher;
 
 public class Punktezettel extends JFrame {
 
