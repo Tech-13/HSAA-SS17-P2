@@ -49,24 +49,17 @@ public class Punktezettel extends JFrame {
     /**   Methode um Punkte einzutragen */    
     public String eintragen(String feld)
     {
-        int würfel0 = w.getWürfel0();
-        int würfel1 = w.getWürfel1();
-        int würfel2 = w.getWürfel2();
-        int würfel3 = w.getWürfel3();
-        int würfel4 = w.getWürfel4();
         int laenge = feld.length();
-        int punktzahl;
-        int p = 0;
-        int z;
+        
         if(laenge == 3){
          StringBuilder builder = new StringBuilder(feld.substring(0, 1));
          int a = Integer.parseInt(builder.toString());        
          
-        if(würfel0 == a){p=p+a;}
-        if(würfel1 == a){p=p+a;}
-        if(würfel2 == a){p=p+a;}
-        if(würfel3 == a){p=p+a;}
-        if(würfel4 == a){p=p+a;}        
+        if(würfel[0] == a){p=p+a;}
+        if(würfel[1] == a){p=p+a;}
+        if(würfel[2] == a){p=p+a;}
+        if(würfel[3] == a){p=p+a;}
+        if(würfel[4] == a){p=p+a;}        
         
        } 
         //Eintragen der Punktzahl
@@ -81,9 +74,9 @@ public class Punktezettel extends JFrame {
                      break;
             case "5er":  punktzahl = p; z=5;
                      break;
-            case "3er-Pasch":  punktzahl = würfel0 + würfel1 + würfel2 + würfel3 + würfel4; z=11;
+            case "3er-Pasch":  for (byte i = 0; i < würfel.length; i++){punktzahl += würfel[i];} z=11;
                      break; 
-            case "4er-Pasch":  punktzahl = würfel0 + würfel1 + würfel2 + würfel3 + würfel4; z=12; 
+            case "4er-Pasch":  for (byte i = 0; i < würfel.length; i++){punktzahl += würfel[i];} z=12; 
                      break;
             case "Full House":  punktzahl = 25; z=13;
                      break;
@@ -93,7 +86,7 @@ public class Punktezettel extends JFrame {
                      break;
             case "Kniffel":  punktzahl = 50; z=16;
                      break;
-            case "Chance":  punktzahl = würfel0 + würfel1 + würfel2 + würfel3 + würfel4; z=17;
+            case "Chance":  for (byte i = 0; i < würfel.length; i++){punktzahl += würfel[i];} z=17;
                      break;                      
             default: punktzahl = -1;
                      break;
@@ -102,7 +95,7 @@ public class Punktezettel extends JFrame {
         p=0;
         System.out.println(punktzahl);
         return feld;
-    } 
+    }  
 
 
 
