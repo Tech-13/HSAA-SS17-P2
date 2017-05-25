@@ -91,6 +91,26 @@ public class Punktezettel_test {
 		assertEquals(22, ergebnis);
 	}
 	
+	@Test
+	public void test3erPasch1() {
+		byte[] würfel = {2,5,5,5,1};
+		int ergebnis = pz.punkteBerechen(Kombi.PASCH_3X, würfel);
+		assertEquals(18, ergebnis);
+	}
+	
+	@Test
+	public void test3erPasch2() {
+		byte[] würfel = {2,5,3,5,1};
+		int ergebnis = pz.punkteBerechen(Kombi.PASCH_3X, würfel);
+		assertEquals(0, ergebnis);
+	}
+	
+	@Test
+	public void test5erPasch1() {
+		byte[] würfel = {1,1,1,1,1};
+		int ergebnis = pz.punkteBerechen(Kombi.PASCH_5X, würfel);
+		assertEquals(50, ergebnis);
+	}
 	
 	@Test
 	public void testchance() {

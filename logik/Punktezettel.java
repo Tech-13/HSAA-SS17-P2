@@ -49,7 +49,7 @@ public class Punktezettel {
 					punkte = check_Pasch4(würfel)? augenzahlSumme(würfel) : 0; 
 					break;
 				case Kombi.PASCH_5X:
-					punkte = check_Pasch5(würfel)? augenzahlSumme(würfel) : 0; 
+					punkte = check_Pasch5(würfel)? 50 : 0; 
 					break;				
 				case Kombi.FULL_HOUSE:
 					punkte = check_FullHouse(würfel)? 25 : 0;
