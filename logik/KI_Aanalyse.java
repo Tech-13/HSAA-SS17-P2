@@ -168,11 +168,14 @@ int[] Sorted;
     public int KI_Aanalyse_Fullhouse()
     {    
     if ( (Sorted[0]) == (Sorted[1]) && ((Sorted[0]) != (Sorted[2])) && (Sorted[2]) == (Sorted[3]) && (Sorted[2]) == (Sorted[4]) )
-	{
-	FullHouse = 1;
-	}
-	else
-	FullHouse = 0;
-	   return (35);
+    {
+    FullHouse = 1;
     }
+    if ( Sorted[4] == (Sorted[3]) && (Sorted[4] != Sorted[2]) && Sorted[2] == Sorted[1] && Sorted[2] == Sorted[1] )
+    {
+    FullHouse = 1;
+    }
+    else
+    FullHouse = 0;
+       return (35);
 }
