@@ -23,7 +23,7 @@ public class Würfelbecher
     {
     	for (int i = 0; i < würfel.length; i++) {
 			if (!würfelMarkiert[i]) {
-				würfel[i] = (byte)((Math.random()*5)+1);
+				würfel[i] = (byte)((Math.random()*6)+1);
 			}
 		}
     }
