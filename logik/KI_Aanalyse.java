@@ -47,6 +47,8 @@ int CountBackward;
 
 //Array Sortiert * 
 int[] Sorted;
+
+//1-6er
     public int KI_Aanalyse_X_er ()
     {
     
@@ -95,14 +97,17 @@ int[] Sorted;
 	   return (31);
     	}
 	
-   public int KI_Analyse_GStraße()// Prüfe auf G-Straße
-   {    
-    if( Sorted[0]==1 && Sorted[1]==2 && Sorted[2]==3 && Sorted[3]==4 && Sorted[4]==5 )
-    	{GroßeStraße =1;}
-    else
+//Große Straße	
+    public int KI_Analyse_GStraße()// Prüfe auf G-Straße
+    {    
+     if( Sorted[0]==1 && Sorted[1]==2 && Sorted[2]==3 && Sorted[3]==4 && Sorted[4]==5 )
+        {GroßeStraße =1;}
+     else
         {GroßeStraße =0;}
+        return (321);
     }
-    
+	
+//Kleine Straße    
     public int KI_Analyse_KStraße()// Prüfe auf K-Straße
     {
      if ( Sorted[0]==1 && Sorted[1]==2 && Sorted[2]==3 && Sorted[3]==4 && Sorted[4]==5 )
@@ -111,27 +116,44 @@ int[] Sorted;
         {KleineStraße =1;}
      else
         {KleineStraße =0;}
-    }
-        
-    public int KI_Aanalyse_Pash()//Prüfe auf Pash
-    {
-    if ( (Sorted[0]) == (Sorted[1]) && (Sorted[0]) == (Sorted[2]) )
-	{
-	DREIerPash = 1;
-	Points4erPash = (Sorted[0] + Sorted[1] + Sorted[2] + Sorted[3] + Sorted[4]);		
-	}
-	else
-	DREIerPash = 0;
-	if (Sorted[0] == Sorted[1] && (Sorted[0]) == (Sorted[2]) && (Sorted[0]) == (Sorted[3]) )
-	{
-	VIERerPash = 1;
-	Points4erPash = (Sorted[0] + Sorted[1] + Sorted[2] + Sorted[3] + Sorted[4]); 	
-	}
-	else
-	VIERerPash = 0;
-	   return (33);
+        return (322);
     }
     
+//3er Pash        
+    public int KI_Aanalyse_3erPash()
+    {
+     if ( Sorted[0] == Sorted[1] && Sorted[0] == Sorted[2] )
+        {
+        DREIerPash = 1;
+        Points3erPash = (Sorted[0] + Sorted[1] + Sorted[2] + Sorted[3] + Sorted[4]);        
+        }
+     if ( Sorted[4] == Sorted[3] && Sorted[4] == Sorted[2] )
+        {
+        DREIerPash = 1;
+        Points3erPash = (Sorted[0] + Sorted[1] + Sorted[2] + Sorted[3] + Sorted[4]);        
+        }
+     else
+        DREIerPash = 0;
+        return (333);
+    }
+//4er Pash
+    public int KI_Aanalyse_4erPash()
+    {
+    if ( Sorted[0] == Sorted[1] && Sorted[0] == Sorted[2] && Sorted[0] == Sorted[3] )
+        {
+        VIERerPash = 1;
+        Points4erPash = (Sorted[0] + Sorted[1] + Sorted[2] + Sorted[3] + Sorted[4]);    
+        }
+    if ( Sorted[4] == Sorted[3] && Sorted[4] == Sorted[2] && Sorted[4] == Sorted[1] )
+        {
+        VIERerPash = 1;
+        Points4erPash = (Sorted[0] + Sorted[1] + Sorted[2] + Sorted[3] + Sorted[4]);    
+        }
+    else
+    VIERerPash = 0;
+       return (334);
+    }
+//5er Pash aka. Kniffel    
     public int KI_Aanalyse_Kniffel()// Prüfe auf Kniffel (5er Pash)
     {
     if(Sorted[0] == Sorted[1] && (Sorted[0]) == (Sorted[2]) && (Sorted[0]) == (Sorted[3])  && (Sorted[0]) == (Sorted[4]) )
@@ -142,7 +164,7 @@ int[] Sorted;
 	Kniffel = 0;	
 	   return (34);
     }
-    
+//Full House    
     public int KI_Aanalyse_Fullhouse()
     {    
     if ( (Sorted[0]) == (Sorted[1]) && ((Sorted[0]) != (Sorted[2])) && (Sorted[2]) == (Sorted[3]) && (Sorted[2]) == (Sorted[4]) )
