@@ -93,21 +93,25 @@ int[] Sorted;
 	   Points1er =Count*6;
 	   }
 	   return (31);
+    	}
+	
+   public int KI_Analyse_GStraße()// Prüfe auf G-Straße
+   {    
+    if( Sorted[0]==1 && Sorted[1]==2 && Sorted[2]==3 && Sorted[3]==4 && Sorted[4]==5 )
+    	{GroßeStraße =1;}
+    else
+        {GroßeStraße =0;}
     }
-    public int KI_Aanalyse_Straße()// Prüfe auf G/K-Straße
+    
+    public int KI_Analyse_KStraße()// Prüfe auf K-Straße
     {
-        KleineStraße = 0;
-		 GroßeStraße = 0;
-    for(int CountForward =0; CountForward < 4;) //Straße Hoch
-		{ CountForward++; }
-		if(CountForward == 4) { KleineStraße = 1;}
-		if(CountForward == 5) {  GroßeStraße = 1;}	
-	for(int CountBackward =5; CountBackward > 4;) //Straße Runter
-		{ CountBackward--; }
-		if(CountBackward == 4) { KleineStraße = 1;}
-		if(CountBackward == 5) {  GroßeStraße = 1;}
-		return (32);
-        }
+     if ( Sorted[0]==1 && Sorted[1]==2 && Sorted[2]==3 && Sorted[3]==4 && Sorted[4]==5 )
+        {KleineStraße =1;}
+     if ( Sorted[0]==5 && Sorted[1]==4 && Sorted[2]==3 && Sorted[3]==2 && Sorted[4]==1 )
+        {KleineStraße =1;}
+     else
+        {KleineStraße =0;}
+    }
         
     public int KI_Aanalyse_Pash()//Prüfe auf Pash
     {
