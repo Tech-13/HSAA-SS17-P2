@@ -89,10 +89,9 @@ public class Punktezettel {
 	}
     
     private boolean check_FullHouse(byte[] sortierteWürfel) {
-    	boolean zwei =  sortierteWürfel[0] == sortierteWürfel[1];
-    	boolean drei = sortierteWürfel[2] == (sortierteWürfel[3]) && (sortierteWürfel[2]) == (sortierteWürfel[4]);
-		return zwei && drei;
-		// TODO 3 gleiche Würfel am Anfang und 2 am Ende
+    	boolean FH1 =  (sortierteWürfel[0]) == (sortierteWürfel[1]) &&  (sortierteWürfel[2]) == (sortierteWürfel[3]) && (sortierteWürfel[2]) == (sortierteWürfel[4]) && (sortierteWürfel[1]) != (sortierteWürfel[2]);
+    	boolean FH2 =  (sortierteWürfel[4]) == (sortierteWürfel[3]) &&  (sortierteWürfel[2]) == (sortierteWürfel[1]) && (sortierteWürfel[2]) == (sortierteWürfel[0]) && (sortierteWürfel[3]) != (sortierteWürfel[2]);
+		return FH1 || FH2;
 	}
     
     private boolean check_KleineStraße(byte[] sortierteWürfel) {
