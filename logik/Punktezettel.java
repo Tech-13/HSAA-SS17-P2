@@ -10,23 +10,17 @@ public class Punktezettel {
      * Default constructor
      */
     public Punktezettel() {
+    	Arrays.fill(punkteFelder, 0);
+    	Arrays.fill(belegteFelder, false);
     }
 
-    /**
-     * 
-     */
-    private int gesamtObererBlock;
 
     /**
      * 
      */
-    private int gesamtUntererBlock;
-
-
-    /**
-     * 
-     */
-    private int[] punkte = new int[12];
+    private int[] punkteFelder = new int[14];
+    
+    private boolean[] belegteFelder = new boolean[14];
 
     /**
      * @param kombiTyp 
@@ -131,28 +125,61 @@ public class Punktezettel {
 
     /**
      * @param kombiTyp 
-     * @param punkte 
+     * @param punkteFelder 
      * @return
      */
     public boolean eintragen(int kombiTyp, int punkte) {
-        // TODO implement here
-        return false;
+        if (istBelegt(kombiTyp)) {
+        	return false;
+		} else {
+			punkteFelder[kombiTyp] = punkte;
+			belegteFelder[kombiTyp] = true;
+			return true;
+		}
+        
     }
 
     /**
      * @param kombiTyp 
      * @return
      */
-    public boolean checkBelegt(int kombiTyp) {
-        return punkte[kombiTyp] != 0;
+    public boolean istBelegt(int kombiTyp) {
+        return belegteFelder[kombiTyp];
+    }
+    
+    /**
+     * @return
+     */
+    public int calcObererBlock() {
+    	int punkte = 0;
+    	for (int i = 0; i <= 6; i++) {
+			punkte += punkteFelder[i];
+		}
+    	return punkte;
     }
 
     /**
      * @return
      */
+    public int calcUntererBlock() {
+    	int punkte = 0;
+    	for (int i = 7; i <= belegteFelder.length; i++) {
+			punkte += punkteFelder[i];
+		}
+    	return punkte;
+    }
+    /**
+     * @return
+     */
     public int getGesamtPkt() {
-        // TODO Bonus...
-        return gesamtObererBlock + gesamtUntererBlock;
+    	int oben = calcObererBlock();
+    	int unten = calcUntererBlock();
+        int punkte = oben + unten;
+        // Bonus bei min. 63 Punkten
+        if (oben > 62) {
+			punkte += 35;
+		}
+        return punkte;
     }
 
 }
