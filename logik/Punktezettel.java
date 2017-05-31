@@ -7,7 +7,7 @@ import java.util.*;
 public class Punktezettel {
 
     /**
-     * Default constructor
+     * Initialisiert alle Punktefelder mit 0 und markiert sie als unbelegt
      */
     public Punktezettel() {
     	Arrays.fill(punkteFelder, 0);
@@ -16,16 +16,16 @@ public class Punktezettel {
 
 
     /**
-     * 
+     * Punkte der einzelnen Kombinationen
      */
     private int[] punkteFelder = new int[14];
     
     private boolean[] belegteFelder = new boolean[14];
 
     /**
-     * @param kombiTyp 
-     * @param würfel byte[] 
-     * @return
+     * @param kombiTyp Art der Kombination für die die Punkte berechnet werden sollen (siehe Kombi Klasse)
+     * @param würfel Array von 5 Würfelwerten die geprüft werden
+     * @return Die berechneten Punkte
      */
     public int punkteBerechen(int kombiTyp, byte[] würfel) {
         int punkte = 0;
@@ -124,9 +124,9 @@ public class Punktezettel {
     	}
 
     /**
-     * @param kombiTyp 
-     * @param punkteFelder 
-     * @return
+     * @param kombiTyp Art der Kombination die eigetragen wird
+     * @param punkte Punktzahl die eingetragen wird
+     * @return True falls das Feld frei war und die Punkte erfolgreich eingetragen wurden, ansonsten false
      */
     public boolean eintragen(int kombiTyp, int punkte) {
         if (istBelegt(kombiTyp)) {
@@ -140,15 +140,17 @@ public class Punktezettel {
     }
 
     /**
-     * @param kombiTyp 
-     * @return
+     * @param kombiTyp Art der Kombination die geprüft werden soll
+     * @return True, wenn das Feld der Kombination schon belegt ist, ansonsten false
      */
     public boolean istBelegt(int kombiTyp) {
         return belegteFelder[kombiTyp];
     }
     
     /**
-     * @return
+     * Die Punkte der 6 oberen Felder, bestehend aus den Kombinationen von gleichen Würfelwerten
+     * z.B. alle Einser, Zweier, Dreier... 
+     * @return Gesamtpunkte des oberen Blocks
      */
     public int calcObererBlock() {
     	int punkte = 0;
@@ -159,7 +161,9 @@ public class Punktezettel {
     }
 
     /**
-     * @return
+     * Alle Punkte der anderen Felder (ohne den oberen Block mit gleichen Würfelwerten)
+     * z.B. Päsche, Straßen, Full House und Chance
+     * @return Gesamtpunkte des unteren Blocks
      */
     public int calcUntererBlock() {
     	int punkte = 0;
@@ -169,7 +173,7 @@ public class Punktezettel {
     	return punkte;
     }
     /**
-     * @return
+     * @return Gesamtpunkte (evtl. inkl. Bonus)
      */
     public int getGesamtPkt() {
     	int oben = calcObererBlock();
