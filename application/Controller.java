@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.Effect;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -53,30 +54,37 @@ public class Controller {
 		}
 		//Image grau = new Image("pictures/gr.png");
 		//im.setImage(grau);
-		
-		im.setEffect(new GaussianBlur());
+		updateWürfel(w);
 		
 	}
 	
 	@FXML
 	protected void handleWurf(MouseEvent m){
 		//ImageView im = (ImageView)m.getSource();
-		Image[] würfelImages = new Image[6];
-		for (int i = 0; i < würfelImages.length; i++) {
-			würfelImages[i] = new Image("pictures/" + (i+1) + ".png");
-		}
 		w.würfeln();
-		byte[] würfelWerte = w.getAlleWürfel();
-		ImageView[] würfelViews = {w1, w2, w3, w4, w5};
-		for (int i = 0; i < würfelViews.length; i++) {
-			würfelViews[i].setImage(würfelImages[würfelWerte[i]-1]);
-		}
+		updateWürfel(w);
+		
 		wurfBtn.setText(w.getCounter() + "x Würfeln");
 		if (w.getCounter() < 1) {
 			wurfBtn.setDisable(true);
 		}
 		data.get(0).setKombi("was anderes");
 	    data.set(0, data.get(0));
+	}
+	
+	private void updateWürfel(Würfelbecher wb) {
+		Image[] würfelImages = new Image[6];
+		for (int i = 0; i < würfelImages.length; i++) {
+			würfelImages[i] = new Image("pictures/" + (i+1) + ".png");
+		}
+		
+		byte[] würfelWerte = wb.getAlleWürfel();
+		ImageView[] würfelViews = {w1, w2, w3, w4, w5};		
+		for (int i = 0; i < würfelViews.length; i++) {
+			würfelViews[i].setImage(würfelImages[würfelWerte[i]-1]);
+			Effect effect = wb.istWürfelMarkiert(i)? new GaussianBlur() : null;
+			würfelViews[i].setEffect(effect);
+		}
 	}
 	
 	@FXML
