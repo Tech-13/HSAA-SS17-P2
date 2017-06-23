@@ -3,13 +3,26 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*; // classes with "J"
 
-public class Spielfeld extends JFrame {
+public class FirstWindow extends JFrame {
 
   // declare controls referenced by more than one "block"
+  static final ImageIcon[] IMAGES = new ImageIcon[] {
+    new ImageIcon("C:\\Users\\balut\\Documents\\NetBeansProjects\\wurfeltest\\pictures\\1.png"),
+    new ImageIcon("C:\\Users\\balut\\Documents\\NetBeansProjects\\wurfeltest\\pictures\\1.png"),
+    new ImageIcon("C:\\Users\\balut\\Documents\\NetBeansProjects\\wurfeltest\\pictures\\2.png"),
+    new ImageIcon("C:\\Users\\balut\\Documents\\NetBeansProjects\\wurfeltest\\pictures\\3.png"),
+    new ImageIcon("C:\\Users\\balut\\Documents\\NetBeansProjects\\wurfeltest\\pictures\\4.png"),
+    new ImageIcon("C:\\Users\\balut\\Documents\\NetBeansProjects\\wurfeltest\\pictures\\5.png"),
+    new ImageIcon("C:\\Users\\balut\\Documents\\NetBeansProjects\\wurfeltest\\pictures\\6.png"),
+  };
+  
+  
   JButton wurfeln;
   JButton wurf1;
-  public Spielfeld() {
-    super("Spielfeld");
+  
+  int Würfel1;
+  public FirstWindow() {
+    super("FirstWindow");
     setDefaultCloseOperation(EXIT_ON_CLOSE);
 
     // menubar comes first
@@ -58,8 +71,50 @@ public class Spielfeld extends JFrame {
   }
 
   public JPanel buildWestPanel() {
+    
+    JLabel imagelabels[] = new JLabel[5];
+    
     JPanel west = new JPanel();
     west.setBackground(Color.GREEN);
+    west.setLayout( new GridLayout( 6, 1, 1, 10));
+    
+    
+    
+    wurfeln = new JButton("Wurfeln");
+    wurfeln.setEnabled(true);
+    wurfeln.addActionListener((ActionEvent e) -> {
+      for(int j=0; j<5; j++){
+        int augenzahl = (int)((Math.random()*6)+1); System.out.println(Würfel1);
+      imagelabels[j].setIcon(IMAGES[augenzahl]);
+      }
+    });
+    west.add(wurfeln);
+    
+    for(int index=0; index<imagelabels.length; index++){
+        int wuerfelNummer = index + 1;
+        JLabel imagelabel = new JLabel(IMAGES[0]);
+        imagelabel.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent e)  {
+             System.out.println("Würfel "+ wuerfelNummer +" markiert");
+            }
+        });
+        west.add(imagelabel);
+        imagelabels[index] = imagelabel;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+   
+
+    
+    
+    
+    
     return west;
   }
 
@@ -67,71 +122,43 @@ public class Spielfeld extends JFrame {
     JPanel north = new JPanel();
     north.setBackground(Color.GREEN);
     
-    wurfeln = new JButton("Wurfeln");
-    wurfeln.setEnabled(true);
-    wurfeln.addActionListener((ActionEvent e) -> {
-      System.out.println("gewurfelt");
-    });
-    north.add(wurfeln);
     
- 
+    
+    
     
     return north;
   }
 
   public JPanel buildCenterPanel() {
     JPanel center = new JPanel();
-     center.setBackground(Color.GREEN);
-    
-    ImageIcon image = new ImageIcon("C:\\Users\\balut\\Documents\\NetBeansProjects\\wurfeltest\\pictures\\1.png");
-    JLabel imagelabel = new JLabel(image);
-    imagelabel.addMouseListener(new MouseAdapter(){
-    public void mouseClicked(MouseEvent e)  {
-     System.out.println("Würfel 1 markiert");}});
+    center.setBackground(Color.GREEN);
     
     
-    ImageIcon image2 = new ImageIcon("C:\\Users\\balut\\Documents\\NetBeansProjects\\wurfeltest\\pictures\\2.png");
-    JLabel imagelabel2 = new JLabel(image2);
-    imagelabel2.addMouseListener(new MouseAdapter(){
-    public void mouseClicked(MouseEvent e)  {
-     System.out.println("Würfel 2 markiert");}});
-    
-    ImageIcon image3 = new ImageIcon("C:\\Users\\balut\\Documents\\NetBeansProjects\\wurfeltest\\pictures\\3.png");
-    JLabel imagelabel3 = new JLabel(image3);
-    imagelabel3.addMouseListener(new MouseAdapter(){
-    public void mouseClicked(MouseEvent e)  {
-     System.out.println("Würfel 3 markiert");}});
+    String[] columnNames = {"First Name","Last Name", "Sport", "# of Years","Vegetarian"};
     
     
-    ImageIcon image4 = new ImageIcon("C:\\Users\\balut\\Documents\\NetBeansProjects\\wurfeltest\\pictures\\4.png");
-    JLabel imagelabel4 = new JLabel(image4);
-    imagelabel4.addMouseListener(new MouseAdapter(){
-    public void mouseClicked(MouseEvent e)  {
-     System.out.println("Würfel 4 markiert");}});
-    
-    
-    ImageIcon image5 = new ImageIcon("C:\\Users\\balut\\Documents\\NetBeansProjects\\wurfeltest\\pictures\\5.png");
-    JLabel imagelabel5 = new JLabel(image5);
-    imagelabel5.addMouseListener(new MouseAdapter(){
-    public void mouseClicked(MouseEvent e)  {
-     System.out.println("Würfel 5 markiert");}});
-    
-    
-    ImageIcon image6 = new ImageIcon("C:\\Users\\balut\\Documents\\NetBeansProjects\\wurfeltest\\pictures\\6.png");
-    JLabel imagelabel6 = new JLabel(image6);
-    imagelabel6.addMouseListener(new MouseAdapter(){
-    public void mouseClicked(MouseEvent e)  {
-     System.out.println("Würfel 6 markiert");}});
-    
-    
+    Object[][] data = {
+    {"Kathy", "Smith",
+     "Snowboarding", new Integer(5), new Boolean(false)},
+    {"John", "Doe",
+     "Rowing", new Integer(3), new Boolean(true)},
+    {"Sue", "Black",
+     "Knitting", new Integer(2), new Boolean(false)},
+    {"Jane", "White",
+     "Speed reading", new Integer(20), new Boolean(true)},
+    {"Joe", "Brown",
+     "Pool", new Integer(10), new Boolean(false)}
+};
+   
+   JTable table = new JTable(data, columnNames); 
+   JScrollPane scrollPane = new JScrollPane(table);
+   center.add(scrollPane); 
+   center.setSize(3000, 150);
+   center.setVisible(true);  
     
    
+   center.add(table); 
     
-    center.add(imagelabel);
-    center.add(imagelabel2);
-    center.add(imagelabel3);
-    center.add(imagelabel4);
-    center.add(imagelabel5);
     
     return center;
   }
@@ -141,7 +168,7 @@ public class Spielfeld extends JFrame {
     
     JFrame frame = new JFrame();
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-   Object rowData[][] = { { " ", " ", " " },
+    Object rowData[][] = { { " ", " ", " " },
         { " ", " ", " " } };
     Object columnNames[] = { "1.Spieler", "2.Spieler", "3Spieler" };
     JTable table = new JTable(rowData, columnNames);
