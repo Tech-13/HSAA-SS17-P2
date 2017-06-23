@@ -39,7 +39,7 @@ public class Würfelbecher
     	return true;
     }
     /**
-     * Markierzt einen angegebenen Würfel
+     * Markiert einen angegebenen Würfel
      * @param nr Der zu markierende Würfel
      */
     public void würfelMarkieren(int nr)
@@ -50,6 +50,17 @@ public class Würfelbecher
     		System.out.println("Fehler: Würfel existiert nicht");
     }
 
+    /**
+     * Entfernt die Markierung des angegebenen Würfels
+     * @param nr Der zu markierende Würfel
+     */
+    public void würfelAbmarkieren(int nr)
+    {
+    	if (nr >= 0 && nr < würfelMarkiert.length)
+    		würfelMarkiert[nr] = false;
+    	else
+    		System.out.println("Fehler: Würfel existiert nicht");
+    }
     
     /**
      * Entfernet alle Markierungen

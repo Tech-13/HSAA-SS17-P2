@@ -48,8 +48,11 @@ public class Controller {
 		
 		for (int i = 0; i < würfelViews.length; i++) {
 			if (im.getId() == (würfelViews[i]).getId()) {
-				w.würfelMarkieren(i);
-				System.out.println(i);
+				if (w.istWürfelMarkiert(i)) {
+					w.würfelAbmarkieren(i);
+				} else {
+					w.würfelMarkieren(i);
+				}
 			}
 		}
 		//Image grau = new Image("pictures/gr.png");
@@ -82,6 +85,7 @@ public class Controller {
 		ImageView[] würfelViews = {w1, w2, w3, w4, w5};		
 		for (int i = 0; i < würfelViews.length; i++) {
 			würfelViews[i].setImage(würfelImages[würfelWerte[i]-1]);
+			
 			Effect effect = wb.istWürfelMarkiert(i)? new GaussianBlur() : null;
 			würfelViews[i].setEffect(effect);
 		}
