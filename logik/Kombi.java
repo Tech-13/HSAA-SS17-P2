@@ -3,12 +3,10 @@ package logik;
 import java.util.*;
 
 /**
- * 
+ * Definiert die möglichen Würfel Kombinationen in Kniffel
  */
 public class Kombi {
-	
-	// TODO Javadoc
-	
+		
     /**
      * 
      */
@@ -73,5 +71,21 @@ public class Kombi {
      * 
      */
     public static final int CHANCE = 13;
+    
+    public static final String[] bezeichnungen = {
+    	"Einser",
+    	"Zweier",
+    	"Dreier",
+    	"Vierer",
+    	"Fünfer",
+    	"Sechser",
+    	"Dreierpasch",
+    	"Viererpasch",
+    	"Kniffel (Fünferpasch)",
+    	"Full House",
+    	"Kleine Straße",
+    	"Große Straße",
+    	"Chance"
+    };
 
 }

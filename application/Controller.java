@@ -1,8 +1,11 @@
 package application;
 
+import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -12,6 +15,8 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
+import logik.Kombi;
 import logik.Würfelbecher;
 
 public class Controller {
@@ -19,22 +24,25 @@ public class Controller {
 	@FXML private ImageView w1, w2, w3, w4, w5;
 	@FXML private Button wurfBtn;
 	private Würfelbecher w;
+	RotateTransition rt;
 	
-    final ObservableList<Punktewerte> data =
-            FXCollections.observableArrayList(
-            new Punktewerte("KNIFFEL"),
-            new Punktewerte("Nein"));
+    final ObservableList<Punktewerte> data = FXCollections.observableArrayList();
 	
     @FXML
     public void initialize() {
-        System.out.println("second");
         w = new Würfelbecher();
 
         
-        TableColumn firstNameCol = tb.getColumns().get(0);
-        firstNameCol.setMinWidth(100);
-        firstNameCol.setCellValueFactory(
-                new PropertyValueFactory<Punktewerte, String>("Kombi"));
+        TableColumn kombiCol = tb.getColumns().get(0);
+        kombiCol.setMinWidth(100);
+        kombiCol.setCellValueFactory(new PropertyValueFactory<Punktewerte, String>("Kombi"));
+        for (String kombiBezeichnug : Kombi.bezeichnungen) {
+			data.add(new Punktewerte(kombiBezeichnug));
+		}
+        data.add(new Punktewerte("==="));
+        data.add(new Punktewerte("Punkte: obererer Block"));
+        data.add(new Punktewerte("Punkte: unterer Block"));
+        data.add(new Punktewerte("Gesamtpunkte"));
         
         tb.setItems(data);
         tb.getSelectionModel().clearSelection();
@@ -55,10 +63,26 @@ public class Controller {
 				}
 			}
 		}
+		ScaleTransition sc = new ScaleTransition(Duration.millis(500), im);
+		sc.setToX(0.5); sc.setToY(0.5);
+//		sc.play();
+		RotateTransition rt = new RotateTransition(Duration.millis(200), im);
+		rt.setFromAngle(-30);
+		rt.setToAngle(30);
+		rt.setAutoReverse(true);
+		rt.setCycleCount(4);
+		rt.play();
+		
+		//rt.playFromStart();
 		//Image grau = new Image("pictures/gr.png");
 		//im.setImage(grau);
 		updateWürfel(w);
 		
+	}
+	
+	private void updateTable(int index) {
+		// JavaFX registriert das neue setzen des Objekts in der Liste
+		data.set(index, data.get(index));
 	}
 	
 	@FXML
@@ -71,8 +95,6 @@ public class Controller {
 		if (w.getCounter() < 1) {
 			wurfBtn.setDisable(true);
 		}
-		data.get(0).setKombi("was anderes");
-	    data.set(0, data.get(0));
 	}
 	
 	private void updateWürfel(Würfelbecher wb) {
