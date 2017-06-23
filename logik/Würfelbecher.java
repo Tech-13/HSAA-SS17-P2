@@ -2,7 +2,7 @@ package logik;
 
 import java.util.*;
 /**
- * Write a description of class Würfelbecher here.
+ * Enthält alle Würfel und berechnet die Zufallswerte von nicht markierten Würfeln
  */
 public class Würfelbecher
 {
@@ -11,7 +11,7 @@ public class Würfelbecher
     private int counter;
 
     /**
-     * Erzeugt ein Array zum speichern der Werte der 5 Würfel
+     * Erzeugt ein Array zum speichern der Werte der 5 Würfel und initialisiert sie
      */
     public Würfelbecher()
     {
@@ -22,7 +22,10 @@ public class Würfelbecher
         counter = 3;
        
     }
-
+	/**
+	 * Würfelt alle nicht markierten Würfel neu
+	 * @return true wenn wirklich gewürfelt wurde und noch Versuche übrig waren
+	 */
     public boolean würfeln()
     {
     	if (counter < 1) {
@@ -35,7 +38,10 @@ public class Würfelbecher
 		} counter--;
     	return true;
     }
-
+    /**
+     * Markierzt einen angegebenen Würfel
+     * @param nr Der zu markierende Würfel
+     */
     public void würfelMarkieren(int nr)
     {
     	if (nr >= 0 && nr < würfelMarkiert.length)
@@ -45,14 +51,20 @@ public class Würfelbecher
     }
 
     
-
+    /**
+     * Entfernet alle Markierungen
+     */
     public void alleWürfelAbmarkieren() {
     	for (int i = 0; i < würfelMarkiert.length; i++) {
 			würfelMarkiert[i] = false;
 		}
     }
     
-  
+    /**
+     * Gibt einen Würfel zurück
+     * @param nr Der zu markierende Würfel
+     * @return
+     */
     public int getWürfel(int nr) {
     	if (nr >= 0 && nr < würfel.length)
     		return würfel[nr];
@@ -64,10 +76,16 @@ public class Würfelbecher
     	return würfel;
     }
 
+    /**
+     * @param nr Der Würfel
+     * @return	true, wenn der angegebene Würfel markiert ist
+     */
 	public boolean istWürfelMarkiert(int nr) {
 		return würfelMarkiert[nr];
 	}
-
+	/**
+	 * @return Die Zahl der übrigen Würfelversuche
+	 */
 	public int getCounter() {
 		return counter;
 	}
