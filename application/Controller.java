@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.GaussianBlur;
@@ -18,16 +19,24 @@ public class Controller {
 	@FXML private Button wurfBtn;
 	private Würfelbecher w;
 	
+    final ObservableList<Punktewerte> data =
+            FXCollections.observableArrayList(
+            new Punktewerte("KNIFFEL"),
+            new Punktewerte("Nein"));
+	
     @FXML
     public void initialize() {
         System.out.println("second");
         w = new Würfelbecher();
-        ObservableList<Punktewerte> list = FXCollections.observableArrayList();
-        list.add(new Punktewerte());
-        list.add(new Punktewerte());
-        tb.getColumns().get(0).setCellValueFactory(new PropertyValueFactory("spieler1"));
-        tb.setItems(list);
+
         
+        TableColumn firstNameCol = tb.getColumns().get(0);
+        firstNameCol.setMinWidth(100);
+        firstNameCol.setCellValueFactory(
+                new PropertyValueFactory<Punktewerte, String>("Kombi"));
+        
+        tb.setItems(data);
+        tb.getSelectionModel().clearSelection();
         
     }
 	
@@ -42,7 +51,7 @@ public class Controller {
 				System.out.println(i);
 			}
 		}
-		Image grau = new Image("pictures/gr.png");
+		//Image grau = new Image("pictures/gr.png");
 		//im.setImage(grau);
 		
 		im.setEffect(new GaussianBlur());
@@ -66,9 +75,15 @@ public class Controller {
 		if (w.getCounter() < 1) {
 			wurfBtn.setDisable(true);
 		}
+		data.get(0).setKombi("was anderes");
+	    data.set(0, data.get(0));
+	}
+	
+	@FXML
+	protected void handleTableClick(MouseEvent m) {
+		System.out.println(tb.getSelectionModel().getSelectedIndex());
 		
-	    
-	}	
+	}
 	
 
 }
