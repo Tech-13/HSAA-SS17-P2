@@ -3,26 +3,34 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*; // classes with "J"
 
-public class FirstWindow extends JFrame {
+public class Spielfeld extends JFrame {
 
   // declare controls referenced by more than one "block"
   static final ImageIcon[] IMAGES = new ImageIcon[] {
-    new ImageIcon("C:\\Users\\balut\\Documents\\NetBeansProjects\\wurfeltest\\pictures\\1.png"),
-    new ImageIcon("C:\\Users\\balut\\Documents\\NetBeansProjects\\wurfeltest\\pictures\\1.png"),
-    new ImageIcon("C:\\Users\\balut\\Documents\\NetBeansProjects\\wurfeltest\\pictures\\2.png"),
-    new ImageIcon("C:\\Users\\balut\\Documents\\NetBeansProjects\\wurfeltest\\pictures\\3.png"),
-    new ImageIcon("C:\\Users\\balut\\Documents\\NetBeansProjects\\wurfeltest\\pictures\\4.png"),
-    new ImageIcon("C:\\Users\\balut\\Documents\\NetBeansProjects\\wurfeltest\\pictures\\5.png"),
-    new ImageIcon("C:\\Users\\balut\\Documents\\NetBeansProjects\\wurfeltest\\pictures\\6.png"),
+    new ImageIcon("pictures\\0.png"),
+    new ImageIcon("pictures\\1.png"),
+    new ImageIcon("pictures\\2.png"),
+    new ImageIcon("pictures\\3.png"),
+    new ImageIcon("pictures\\4.png"),
+    new ImageIcon("pictures\\5.png"),
+    new ImageIcon("pictures\\6.png"),
   };
-  
+  static final ImageIcon[] IMAGES_MARKED = new ImageIcon[] {
+    new ImageIcon("pictures\\0m.png"),
+    new ImageIcon("pictures\\1m.png"),
+    new ImageIcon("pictures\\2m.png"),
+    new ImageIcon("pictures\\3m.png"),
+    new ImageIcon("pictures\\4m.png"),
+    new ImageIcon("pictures\\5m.png"),
+    new ImageIcon("pictures\\6m.png"),
+  }; 
   
   JButton wurfeln;
   JButton wurf1;
   
   int Würfel1;
-  public FirstWindow() {
-    super("FirstWindow");
+  public Spielfeld() {
+    super("Spielfeld");
     setDefaultCloseOperation(EXIT_ON_CLOSE);
 
     // menubar comes first
@@ -84,7 +92,7 @@ public class FirstWindow extends JFrame {
     wurfeln.setEnabled(true);
     wurfeln.addActionListener((ActionEvent e) -> {
       for(int j=0; j<5; j++){
-        int augenzahl = (int)((Math.random()*6)+1); System.out.println(Würfel1);
+        int augenzahl = (int)((Math.random()*6)+1); System.out.println(augenzahl);
       imagelabels[j].setIcon(IMAGES[augenzahl]);
       }
     });
