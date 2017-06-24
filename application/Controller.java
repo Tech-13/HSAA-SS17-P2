@@ -2,14 +2,11 @@ package application;
 
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
-import javafx.beans.binding.IntegerExpression;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.SelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -53,12 +50,7 @@ public class Controller {
         kombiCol.setMinWidth(100);
         kombiCol.setCellValueFactory(new PropertyValueFactory<Punktewerte, String>("Kombi"));
         kombiCol.setStyle("-fx-font-weight: bolder;");
-//        
-//        TableColumn spieler1 = tb.getColumns().get(1);
-//        spieler1.setMinWidth(100);
-//        spieler1.setCellValueFactory(new PropertyValueFactory<Punktewerte, Integer>("punkt0"));
-//        TableColumn<Punktewerte, Number> spieler2 =	tb.getColumns().get(2);
-//        		spieler2.setCellValueFactory(cellData -> cellData.getValue().punkt0Property());
+        kombiCol.setSortable(false);
         		
         
         for (int i = 0; i < spielerAnzahl; i++) {
@@ -66,6 +58,7 @@ public class Controller {
         	final int index = i;
         	sp.setCellValueFactory(cell -> cell.getValue().punkteProperty(index));
         	sp.setText(spielerNamen[i]);
+        	sp.setSortable(false);
         	tb.getColumns().add(sp);
 		}
         
@@ -160,7 +153,7 @@ public class Controller {
 //		System.out.println(tb.getSelectionModel().getSelectedIndex());
 		int index = tb.getSelectionModel().getSelectedIndex();
 		// Kombi Felder sind nur der obere Teil < 14
-		if (index >= 13) {
+		if (index >= 13 || index < 0) {
 			return;
 		}
 		int spieler = spielerAktuell;
