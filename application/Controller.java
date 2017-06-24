@@ -152,22 +152,26 @@ public class Controller {
 	protected void handleTableClick(MouseEvent m) {
 //		System.out.println(tb.getSelectionModel().getSelectedIndex());
 		int index = tb.getSelectionModel().getSelectedIndex();
+		// Kombi Felder sind nur der obere Teil < 14
+		if (index >= 13) {
+			return;
+		}
 		int spieler = spielerAktuell;
+
 		
+		int punkte = pz[spieler].punkteBerechen(index+1, w.getAlleWürfel());
+		data.get(index).punkteProperty(spieler).set(punkte);
 		// Bei Doppelclick wird eingetragen, ansonsten nur Punkte berechnet
 		if (m.getClickCount() > 1) {
 			tb.getSelectionModel().clearSelection();
 			spielerAktuell++;
 			spielerAktuell = spielerAktuell%spielerAnzahl;
+			pz[spieler].eintragen(index+1, punkte);
+			updatePunkteSumme(spieler);
 			w = new Würfelbecher();
 			updateWurfButton();
 			updateWürfel(w);
 			updateInfo();
-		} else {
-			// index+1 weil die Kombi IDs mit 1 statt 0 anfangen...
-			int punkte = pz[spieler].punkteBerechen(index+1, w.getAlleWürfel());
-			data.get(index).punkteProperty(spieler).set(punkte);
-			//updateTable(index);
 		}
 		
 		
@@ -175,6 +179,12 @@ public class Controller {
 	
 	private void updateInfo() {
 		infoLbl.setText("Spieler " + (spielerAktuell+1) + " ist an der Reihe!");
+	}
+	
+	private void updatePunkteSumme(int spieler) {
+		data.get(14).punkteProperty(spieler).set(pz[spieler].calcObererBlock());
+		data.get(15).punkteProperty(spieler).set(pz[spieler].calcUntererBlock());
+		data.get(16).punkteProperty(spieler).set(pz[spieler].getGesamtPkt());
 	}
 	
 
