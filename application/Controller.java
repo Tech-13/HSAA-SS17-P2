@@ -29,11 +29,17 @@ public class Controller {
 	@FXML private Button wurfBtn;
 	@FXML private Label	infoLbl;
 	private Würfelbecher w; private Punktezettel[] pz;
-	private int spielerAnzahl = 5, spielerAktuell = 0;
-	String[] spielerNamen = {"Hans", "Peter", "Dieter", "Markus", "Max"};
+	private int spielerAnzahl, spielerAktuell = 0;
+	public String[] spielerNamen;
 	
     final ObservableList<Punktewerte> data = FXCollections.observableArrayList();
 	
+    public Controller(String[] spielerNamen) {
+		this.spielerNamen = spielerNamen;
+		spielerAnzahl = spielerNamen.length;
+		
+	}
+    
     @FXML
     public void initialize() {
         w = new Würfelbecher();
@@ -46,6 +52,7 @@ public class Controller {
         TableColumn kombiCol = tb.getColumns().get(0);
         kombiCol.setMinWidth(100);
         kombiCol.setCellValueFactory(new PropertyValueFactory<Punktewerte, String>("Kombi"));
+        kombiCol.setStyle("-fx-font-weight: bolder;");
 //        
 //        TableColumn spieler1 = tb.getColumns().get(1);
 //        spieler1.setMinWidth(100);
@@ -157,7 +164,7 @@ public class Controller {
 			return;
 		}
 		int spieler = spielerAktuell;
-
+		
 		
 		int punkte = pz[spieler].punkteBerechen(index+1, w.getAlleWürfel());
 		data.get(index).punkteProperty(spieler).set(punkte);
