@@ -2,3 +2,7 @@
 #punkte .table-column {
   -fx-alignment: CENTER;
 }
+
+.table-view {
+	-fx-font-size: 16;
+} 

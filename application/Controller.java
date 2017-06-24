@@ -1,10 +1,12 @@
 package application;
 
+import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -73,6 +75,7 @@ public class Controller {
         
         tb.setItems(data);
         tb.getSelectionModel().clearSelection();
+
         
         updateInfo();
         
@@ -95,15 +98,19 @@ public class Controller {
 		ScaleTransition sc = new ScaleTransition(Duration.millis(500), im);
 		sc.setToX(0.5); sc.setToY(0.5);
 //		sc.play();
-		RotateTransition rt = new RotateTransition(Duration.millis(200), im);
-		rt.setFromAngle(-30);
-		rt.setToAngle(30);
-		rt.setAutoReverse(true);
-		rt.setCycleCount(4);
-//		rt.play();
-		
+
 		//rt.playFromStart();
-		updateWürfel(w);
+		updateWürfel(w, false);
+		
+	}
+	private void rotate(Node node) {
+		RotateTransition rt = new RotateTransition(Duration.millis(500), node);
+		rt.setFromAngle(0);
+		rt.setToAngle(360);
+		rt.setAutoReverse(true);
+		rt.setCycleCount(1);
+		rt.setInterpolator(Interpolator.EASE_BOTH);
+		rt.play();
 		
 	}
 	
@@ -116,7 +123,7 @@ public class Controller {
 	protected void handleWurf(MouseEvent m){
 		//ImageView im = (ImageView)m.getSource();
 		w.würfeln();
-		updateWürfel(w);
+		updateWürfel(w, true);
 		updateWurfButton();
 
 	}
@@ -130,7 +137,7 @@ public class Controller {
 		}
 	}
 	
-	private void updateWürfel(Würfelbecher wb) {
+	private void updateWürfel(Würfelbecher wb, boolean animate) {
 		Image[] würfelImages = new Image[6];
 		for (int i = 0; i < würfelImages.length; i++) {
 			würfelImages[i] = new Image("pictures/" + (i+1) + ".png");
@@ -147,8 +154,10 @@ public class Controller {
 			
 			Effect effect = wb.istWürfelMarkiert(i)? new GaussianBlur() : null;
 			würfelViews[i].setEffect(effect);
+			if(!w.istWürfelMarkiert(i) && animate) rotate(würfelViews[i]);
 		}
 	}
+
 	
 	@FXML
 	protected void handleTableClick(MouseEvent m) {
@@ -172,7 +181,7 @@ public class Controller {
 			updatePunkteSumme(spieler);
 			w = new Würfelbecher();
 			updateWurfButton();
-			updateWürfel(w);
+			updateWürfel(w, true);
 			updateInfo();
 		}
 		
