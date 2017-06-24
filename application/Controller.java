@@ -74,6 +74,8 @@ public class Controller {
         tb.setItems(data);
         tb.getSelectionModel().clearSelection();
         
+        updateInfo();
+        
     }
 	
 	@FXML
@@ -178,7 +180,7 @@ public class Controller {
 	}
 	
 	private void updateInfo() {
-		infoLbl.setText("Spieler " + (spielerAktuell+1) + " ist an der Reihe!");
+		infoLbl.setText(spielerNamen[spielerAktuell] + "  ist am Zug!");
 	}
 	
 	private void updatePunkteSumme(int spieler) {

@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="744.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -63,9 +64,15 @@
                   <Image url="@../pictures/gr.png" />
                </image>
             </ImageView>
-            <Button fx:id="wurfBtn" mnemonicParsing="false" onMouseClicked="#handleWurf" prefHeight="42.0" prefWidth="128.0" text="3x Würfeln" GridPane.rowIndex="5" />
+            <Button fx:id="wurfBtn" mnemonicParsing="false" onMouseClicked="#handleWurf" prefHeight="59.0" prefWidth="128.0" text="3x Würfeln" GridPane.rowIndex="5">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
          </children>
       </GridPane>
-      <Label fx:id="infoLbl" layoutX="163.0" layoutY="709.0" prefHeight="21.0" prefWidth="717.0" text="Willkommen" />
+      <Label fx:id="infoLbl" layoutX="17.0" layoutY="709.0" prefHeight="25.0" prefWidth="863.0" text="Willkommen">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
    </children>
 </Pane>
