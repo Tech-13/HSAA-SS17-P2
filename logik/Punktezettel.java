@@ -170,7 +170,7 @@ public class Punktezettel {
 	 */
 	public int calcUntererBlock() {
 		int punkte = 0;
-		for (int i = 7; i <= belegteFelder.length; i++) {
+		for (int i = 7; i < punkteFelder.length; i++) {
 			punkte += punkteFelder[i];
 		}
 		return punkte;
