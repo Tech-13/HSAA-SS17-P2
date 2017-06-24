@@ -1,16 +1,22 @@
 package application;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleSetProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Punktewerte {
-	public String kombi;
-	private int[] punkte = {0, 0, 0};
+	private String kombi;
+	private IntegerProperty[] punkte;
 	private int spielerAnzahl = 3;
 	
-	public Punktewerte(String pKombi) {
+	public Punktewerte(String pKombi, int spieler) {
 		this.kombi = (pKombi);
+		punkte = new SimpleIntegerProperty[spieler];
+		for (int i = 0; i < punkte.length; i++) {
+			punkte[i] = new SimpleIntegerProperty();
+		}
 	}
 
 	public String getKombi() {
@@ -21,20 +27,8 @@ public class Punktewerte {
 		this.kombi = kombi;
 	}
 
-	public int[] getPunkte() {
-		return punkte;
-	}
-	
-	public int getPunkt(int nr) {
+	public IntegerProperty punkteProperty(int nr) {
 		return punkte[nr];
-	}
-
-	public void setPunkte(int[] punkte) {
-		this.punkte = punkte;
-	}
-	
-	public void setPunkt(int nr, int wert) {
-		punkte[nr] = wert;
 	}
 
 	

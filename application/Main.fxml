@@ -19,9 +19,6 @@
       <TableView id="punkte" fx:id="tb" layoutX="163.0" layoutY="25.0" onMouseClicked="#handleTableClick" prefHeight="672.0" prefWidth="717.0">
         <columns>
           <TableColumn fx:id="kombis" prefWidth="156.95947265625" text="Kombinationen" />
-            <TableColumn prefWidth="123.71875" text="Spieler 1" />
-            <TableColumn minWidth="0.0" prefWidth="139.6082763671875" text="Spieler 2" />
-          <TableColumn prefWidth="215.791015625" text="Spieler 3" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

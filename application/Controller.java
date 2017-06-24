@@ -2,11 +2,13 @@ package application;
 
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
+import javafx.beans.binding.IntegerExpression;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.SelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,14 +19,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import logik.Kombi;
+import logik.Punktezettel;
 import logik.Würfelbecher;
 
 public class Controller {
 	@FXML private TableView<Punktewerte> tb;
 	@FXML private ImageView w1, w2, w3, w4, w5;
 	@FXML private Button wurfBtn;
-	private Würfelbecher w;
-	RotateTransition rt;
+	private Würfelbecher w; private Punktezettel[] pz;
+	private int spielerAnzahl = 3;
 	
     final ObservableList<Punktewerte> data = FXCollections.observableArrayList();
 	
@@ -32,17 +35,38 @@ public class Controller {
     public void initialize() {
         w = new Würfelbecher();
 
+        pz = new Punktezettel[spielerAnzahl];
+        for (int i = 0; i < pz.length; i++) {
+        	pz[i] = new Punktezettel();
+        }
         
         TableColumn kombiCol = tb.getColumns().get(0);
         kombiCol.setMinWidth(100);
         kombiCol.setCellValueFactory(new PropertyValueFactory<Punktewerte, String>("Kombi"));
-        for (String kombiBezeichnug : Kombi.bezeichnungen) {
-			data.add(new Punktewerte(kombiBezeichnug));
+//        
+//        TableColumn spieler1 = tb.getColumns().get(1);
+//        spieler1.setMinWidth(100);
+//        spieler1.setCellValueFactory(new PropertyValueFactory<Punktewerte, Integer>("punkt0"));
+//        TableColumn<Punktewerte, Number> spieler2 =	tb.getColumns().get(2);
+//        		spieler2.setCellValueFactory(cellData -> cellData.getValue().punkt0Property());
+        		
+        
+        for (int i = 0; i < spielerAnzahl; i++) {
+        	TableColumn<Punktewerte, Number> sp = new TableColumn<>();
+        	sp.setCellValueFactory(cell -> cell.getValue().punkteProperty(0));
+        	//TODO Spieler Namen
+        	sp.setText("Spieler1");
+        	tb.getColumns().add(sp);
 		}
-        data.add(new Punktewerte("==="));
-        data.add(new Punktewerte("Punkte: obererer Block"));
-        data.add(new Punktewerte("Punkte: unterer Block"));
-        data.add(new Punktewerte("Gesamtpunkte"));
+        
+        
+        for (String kombiBezeichnug : Kombi.bezeichnungen) {
+			data.add(new Punktewerte(kombiBezeichnug, spielerAnzahl));
+		}
+        data.add(new Punktewerte("===", spielerAnzahl));
+        data.add(new Punktewerte("Punkte: obererer Block", spielerAnzahl));
+        data.add(new Punktewerte("Punkte: unterer Block", spielerAnzahl));
+        data.add(new Punktewerte("Gesamtpunkte", spielerAnzahl));
         
         tb.setItems(data);
         tb.getSelectionModel().clearSelection();
@@ -71,7 +95,7 @@ public class Controller {
 		rt.setToAngle(30);
 		rt.setAutoReverse(true);
 		rt.setCycleCount(4);
-		rt.play();
+//		rt.play();
 		
 		//rt.playFromStart();
 		//Image grau = new Image("pictures/gr.png");
@@ -115,7 +139,20 @@ public class Controller {
 	
 	@FXML
 	protected void handleTableClick(MouseEvent m) {
-		System.out.println(tb.getSelectionModel().getSelectedIndex());
+//		System.out.println(tb.getSelectionModel().getSelectedIndex());
+		int index = tb.getSelectionModel().getSelectedIndex();
+		int spieler = 0;
+		
+		
+		if (m.getClickCount() > 1) {
+			tb.getSelectionModel().clearSelection();
+		} else {
+			// index+1 weil die Kombi IDs mit 1 statt 0 anfangen...
+			int punkte = pz[spieler].punkteBerechen(index+1, w.getAlleWürfel());
+			data.get(index).punkteProperty(0).set(punkte);
+			//updateTable(index);
+		}
+		
 		
 	}
 	
