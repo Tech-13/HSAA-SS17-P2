@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.SelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -26,6 +27,7 @@ public class Controller {
 	@FXML private TableView<Punktewerte> tb;
 	@FXML private ImageView w1, w2, w3, w4, w5;
 	@FXML private Button wurfBtn;
+	@FXML private Label	infoLbl;
 	private Würfelbecher w; private Punktezettel[] pz;
 	private int spielerAnzahl = 5, spielerAktuell = 0;
 	
@@ -150,7 +152,7 @@ public class Controller {
 		int index = tb.getSelectionModel().getSelectedIndex();
 		int spieler = spielerAktuell;
 		
-		
+		// Bei Doppelclick wird eingetragen, ansonsten nur Punkte berechnet
 		if (m.getClickCount() > 1) {
 			tb.getSelectionModel().clearSelection();
 			spielerAktuell++;
@@ -158,6 +160,7 @@ public class Controller {
 			w = new Würfelbecher();
 			updateWurfButton();
 			//updateWürfel(w);
+			updateInfo();
 		} else {
 			// index+1 weil die Kombi IDs mit 1 statt 0 anfangen...
 			int punkte = pz[spieler].punkteBerechen(index+1, w.getAlleWürfel());
@@ -166,6 +169,10 @@ public class Controller {
 		}
 		
 		
+	}
+	
+	private void updateInfo() {
+		infoLbl.setText("Spieler " + (spielerAktuell+1) + " ist an der Reihe!");
 	}
 	
 
