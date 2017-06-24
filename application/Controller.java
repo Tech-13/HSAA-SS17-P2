@@ -27,7 +27,7 @@ public class Controller {
 	@FXML private ImageView w1, w2, w3, w4, w5;
 	@FXML private Button wurfBtn;
 	private Würfelbecher w; private Punktezettel[] pz;
-	private int spielerAnzahl = 3;
+	private int spielerAnzahl = 5, spielerAktuell = 0;
 	
     final ObservableList<Punktewerte> data = FXCollections.observableArrayList();
 	
@@ -53,7 +53,8 @@ public class Controller {
         
         for (int i = 0; i < spielerAnzahl; i++) {
         	TableColumn<Punktewerte, Number> sp = new TableColumn<>();
-        	sp.setCellValueFactory(cell -> cell.getValue().punkteProperty(0));
+        	final int index = i;
+        	sp.setCellValueFactory(cell -> cell.getValue().punkteProperty(index));
         	//TODO Spieler Namen
         	sp.setText("Spieler1");
         	tb.getColumns().add(sp);
@@ -114,10 +115,16 @@ public class Controller {
 		//ImageView im = (ImageView)m.getSource();
 		w.würfeln();
 		updateWürfel(w);
-		
+		updateWurfButton();
+
+	}
+	
+	private void updateWurfButton() {
 		wurfBtn.setText(w.getCounter() + "x Würfeln");
 		if (w.getCounter() < 1) {
 			wurfBtn.setDisable(true);
+		} else {
+			wurfBtn.setDisable(false);
 		}
 	}
 	
@@ -141,15 +148,20 @@ public class Controller {
 	protected void handleTableClick(MouseEvent m) {
 //		System.out.println(tb.getSelectionModel().getSelectedIndex());
 		int index = tb.getSelectionModel().getSelectedIndex();
-		int spieler = 0;
+		int spieler = spielerAktuell;
 		
 		
 		if (m.getClickCount() > 1) {
 			tb.getSelectionModel().clearSelection();
+			spielerAktuell++;
+			spielerAktuell = spielerAktuell%spielerAnzahl;
+			w = new Würfelbecher();
+			updateWurfButton();
+			//updateWürfel(w);
 		} else {
 			// index+1 weil die Kombi IDs mit 1 statt 0 anfangen...
 			int punkte = pz[spieler].punkteBerechen(index+1, w.getAlleWürfel());
-			data.get(index).punkteProperty(0).set(punkte);
+			data.get(index).punkteProperty(spieler).set(punkte);
 			//updateTable(index);
 		}
 		
