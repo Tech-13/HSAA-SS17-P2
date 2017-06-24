@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import logik.Kombi;
 import logik.Punktezettel;
+import logik.Würfelbecher;
 
 public class Punktezettel_test {
 
@@ -110,6 +111,14 @@ public class Punktezettel_test {
 		byte[] würfel = {1,1,1,1,1};
 		int ergebnis = pz.punkteBerechen(Kombi.PASCH_5X, würfel);
 		assertEquals(50, ergebnis);
+	}
+	
+	@Test
+	public void test5erPasch2() {
+		//Test mit leerem byte array
+		byte[] würfel = new byte[5];
+		int ergebnis = pz.punkteBerechen(Kombi.PASCH_5X, würfel);
+		assertEquals(0, ergebnis);
 	}
 	
 	@Test
