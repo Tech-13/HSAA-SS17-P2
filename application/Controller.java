@@ -101,8 +101,6 @@ public class Controller {
 //		rt.play();
 		
 		//rt.playFromStart();
-		//Image grau = new Image("pictures/gr.png");
-		//im.setImage(grau);
 		updateWürfel(w);
 		
 	}
@@ -139,7 +137,11 @@ public class Controller {
 		byte[] würfelWerte = wb.getAlleWürfel();
 		ImageView[] würfelViews = {w1, w2, w3, w4, w5};		
 		for (int i = 0; i < würfelViews.length; i++) {
-			würfelViews[i].setImage(würfelImages[würfelWerte[i]-1]);
+			try {
+				würfelViews[i].setImage(würfelImages[würfelWerte[i]-1]);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				würfelViews[i].setImage(new Image("pictures/gr.png"));
+			}
 			
 			Effect effect = wb.istWürfelMarkiert(i)? new GaussianBlur() : null;
 			würfelViews[i].setEffect(effect);
@@ -159,7 +161,7 @@ public class Controller {
 			spielerAktuell = spielerAktuell%spielerAnzahl;
 			w = new Würfelbecher();
 			updateWurfButton();
-			//updateWürfel(w);
+			updateWürfel(w);
 			updateInfo();
 		} else {
 			// index+1 weil die Kombi IDs mit 1 statt 0 anfangen...
