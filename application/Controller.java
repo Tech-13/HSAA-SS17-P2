@@ -30,6 +30,7 @@ public class Controller {
 	@FXML private Label	infoLbl;
 	private Würfelbecher w; private Punktezettel[] pz;
 	private int spielerAnzahl = 5, spielerAktuell = 0;
+	String[] spielerNamen = {"Hans", "Peter", "Dieter", "Markus", "Max"};
 	
     final ObservableList<Punktewerte> data = FXCollections.observableArrayList();
 	
@@ -57,8 +58,7 @@ public class Controller {
         	TableColumn<Punktewerte, Number> sp = new TableColumn<>();
         	final int index = i;
         	sp.setCellValueFactory(cell -> cell.getValue().punkteProperty(index));
-        	//TODO Spieler Namen
-        	sp.setText("Spieler1");
+        	sp.setText(spielerNamen[i]);
         	tb.getColumns().add(sp);
 		}
         
