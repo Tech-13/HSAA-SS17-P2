@@ -118,7 +118,10 @@ public class Punktezettel {
 		return P41 || P42;
 	}
 
-	private boolean check_Pasch5(byte[] sortierteWürfel) {	    
+	private boolean check_Pasch5(byte[] sortierteWürfel) {
+		if (sortierteWürfel[4] == 0) {
+			return false;
+		}
 		boolean P50 = (sortierteWürfel[4]) == (sortierteWürfel[3]) && (sortierteWürfel[3]) == (sortierteWürfel[2]) && (sortierteWürfel[2]) == (sortierteWürfel[1]) && (sortierteWürfel[1]) == (sortierteWürfel[0]);
 		return P50;
 	}
