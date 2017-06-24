@@ -40,27 +40,27 @@
          <children>
             <ImageView fx:id="w1" fitHeight="122.0" fitWidth="123.0" onMouseClicked="#handleMouse">
                <image>
-                  <Image url="@../../../../git/HSAA-SS17-P2/gui/pictures/gr.png" />
+                  <Image url="@../pictures/gr.png" />
                </image>
             </ImageView>
             <ImageView fx:id="w2" fitHeight="122.0" fitWidth="123.0" layoutX="10.0" layoutY="126.0" onMouseClicked="#handleMouse" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../../../../git/HSAA-SS17-P2/gui/pictures/gr.png" />
+                  <Image url="@../pictures/gr.png" />
                </image>
             </ImageView>
             <ImageView fx:id="w3" fitHeight="122.0" fitWidth="123.0" layoutX="10.0" layoutY="8.0" onMouseClicked="#handleMouse" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../../../git/HSAA-SS17-P2/gui/pictures/gr.png" />
+                  <Image url="@../pictures/gr.png" />
                </image>
             </ImageView>
             <ImageView fx:id="w4" fitHeight="122.0" fitWidth="123.0" layoutX="10.0" layoutY="362.0" onMouseClicked="#handleMouse" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../../../../git/HSAA-SS17-P2/gui/pictures/gr.png" />
+                  <Image url="@../pictures/gr.png" />
                </image>
             </ImageView>
             <ImageView fx:id="w5" fitHeight="122.0" fitWidth="123.0" layoutX="10.0" layoutY="126.0" onMouseClicked="#handleMouse" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../../../../git/HSAA-SS17-P2/gui/pictures/gr.png" />
+                  <Image url="@../pictures/gr.png" />
                </image>
             </ImageView>
             <Button fx:id="wurfBtn" mnemonicParsing="false" onMouseClicked="#handleWurf" prefHeight="42.0" prefWidth="128.0" text="3x Würfeln" GridPane.rowIndex="5" />
