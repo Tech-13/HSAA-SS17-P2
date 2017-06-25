@@ -53,6 +53,7 @@ public class Controller {
         kombiCol.setMinWidth(100);
         kombiCol.setCellValueFactory(new PropertyValueFactory<Punktewerte, String>("Kombi"));
         kombiCol.setStyle("-fx-font-weight: bolder;");
+        kombiCol.getStyleClass().add("kombis");
         kombiCol.setSortable(false);
         
         for (int i = 0; i < spielerAnzahl; i++) {
@@ -73,14 +74,14 @@ public class Controller {
                         if (i < 14) {
                         	System.out.println(pz[colIndex].istBelegt(i) + " index " +colIndex + "row" + i);
                         	if (pz[colIndex].istBelegt(i)) {
-								this.setStyle("-fx-text-fill: black;");
+                        		this.getStyleClass().add("belegt");
 							} else	{
-								this.setStyle("-fx-text-fill: white;");
+								this.getStyleClass().remove("belegt");
 							}
 						} else if (i == 14) {
-							this.setStyle("-fx-text-fill: white;");
+							this.getStyleClass().remove("belegt");
 						} else {
-							this.setStyle("-fx-text-fill: black;");
+							this.getStyleClass().add("belegt");
 						}
                         
                     }
@@ -106,7 +107,7 @@ public class Controller {
         tb.setItems(data);
         tb.getSelectionModel().clearSelection();
         
-        updateInfo();
+        updateInfo();        
         
     }
 	
@@ -212,6 +213,7 @@ public class Controller {
 			spielerAktuell++;
 			spielerAktuell = spielerAktuell%spielerAnzahl;
 			pz[spieler].eintragen(index+1, punkte);
+			updateSpielerCol();
 			updateTable(index);
 			updatePunkteSumme(spieler);
 			w = new Würfelbecher();
@@ -221,6 +223,15 @@ public class Controller {
 		}
 		
 		
+	}
+	private void updateSpielerCol() {
+		for (int i = 0; i < spielerAnzahl; i++) {
+			if (i == spielerAktuell) {
+				tb.getColumns().get(i+1).getStyleClass().add("aktuell");
+			} else {
+				tb.getColumns().get(i+1).getStyleClass().remove("aktuell");
+			}
+		}
 	}
 	
 	private void updateInfo() {
