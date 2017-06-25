@@ -27,8 +27,9 @@ public class Punktezettel {
 	 * @param würfel Array von 5 Würfelwerten die geprüft werden
 	 * @return Die berechneten Punkte
 	 */
-	public int punkteBerechen(int kombiTyp, byte[] würfel) {
+	public int punkteBerechen(int kombiTyp, byte[] pwürfel) {
 		int punkte = 0;
+		byte[] würfel = Arrays.copyOf(pwürfel, pwürfel.length);
 		Arrays.sort(würfel);
 
 		if(kombiTyp <= 6) {
