@@ -1,3 +1,5 @@
+package oldSwingGui;
+
 
 import java.awt.*;
 import java.awt.event.*;
@@ -172,7 +174,7 @@ public class Spielfeld extends JFrame {
   }
 
   public static void main(String[] args) {
-    new FirstWindow().setVisible(true);
+    new Spielfeld().setVisible(true);
     
     JFrame frame = new JFrame();
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
