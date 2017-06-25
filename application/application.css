@@ -10,6 +10,7 @@
 
 #punkte .table-column.kombis {
   -fx-text-fill: black;
+  -fx-font-weight: bolder;
 }
 
 .table-view {

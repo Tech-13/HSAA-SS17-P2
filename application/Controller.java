@@ -52,7 +52,6 @@ public class Controller {
         TableColumn kombiCol = tb.getColumns().get(0);
         kombiCol.setMinWidth(100);
         kombiCol.setCellValueFactory(new PropertyValueFactory<Punktewerte, String>("Kombi"));
-        kombiCol.setStyle("-fx-font-weight: bolder;");
         kombiCol.getStyleClass().add("kombis");
         kombiCol.setSortable(false);
         
