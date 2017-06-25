@@ -200,7 +200,9 @@ public class Controller {
 		if (index >= 13 || index < 0) {
 			return;
 		}
-		int spieler = spielerAktuell;		
+		int spieler = spielerAktuell;
+		// Nichts tun wenn Feld schon belegt
+		if (pz[spieler].istBelegt(index+1)) return;
 		
 		int punkte = pz[spieler].punkteBerechen(index+1, w.getAlleWürfel());
 		data.get(index).punkteProperty(spieler).set(punkte);
