@@ -17,7 +17,7 @@ public class Würfelbecher
     {
         würfel = new byte[5];
         würfelMarkiert = new boolean[5];
-        würfeln();
+//        würfeln();
         alleWürfelAbmarkieren();
         counter = 3;
        

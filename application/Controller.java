@@ -107,7 +107,8 @@ public class Controller {
         tb.setItems(data);
         tb.getSelectionModel().clearSelection();
         
-        updateInfo();        
+        updateInfo();
+        updateSpielerCol();
         
     }
 	
@@ -125,15 +126,7 @@ public class Controller {
 				}
 			}
 		}
-		ScaleTransition sc = new ScaleTransition(Duration.millis(500), im);
-		if (im.getEffect() != null) {
-			sc.setToX(1); sc.setToY(1);
-		} else {
-			sc.setToX(0.8); sc.setToY(0.8);			
-		}
-		sc.play();
 
-		//rt.playFromStart();
 		updateWürfel(w, false);
 		
 	}
@@ -186,10 +179,21 @@ public class Controller {
 				würfelViews[i].setImage(new Image("pictures/gr.png"));
 			}
 			
-			Effect effect = wb.istWürfelMarkiert(i)? new GaussianBlur() : null;
-			würfelViews[i].setEffect(effect);
+//			Effect effect = wb.istWürfelMarkiert(i)? new GaussianBlur() : null;
+//			würfelViews[i].setEffect(effect);
+			würfelMarkiertEffect(würfelViews[i], wb.istWürfelMarkiert(i));
 			if(!w.istWürfelMarkiert(i) && animate) rotate(würfelViews[i]);
 		}
+	}
+	
+	private void würfelMarkiertEffect(Node n, boolean markiert) {
+		ScaleTransition sc = new ScaleTransition(Duration.millis(200), n);
+		if (!markiert) {
+			sc.setToX(1); sc.setToY(1);
+		} else {
+			sc.setToX(0.8); sc.setToY(0.8);			
+		}
+		sc.play();
 	}
 
 	
