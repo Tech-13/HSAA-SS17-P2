@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -53,17 +54,46 @@ public class Controller {
         kombiCol.setCellValueFactory(new PropertyValueFactory<Punktewerte, String>("Kombi"));
         kombiCol.setStyle("-fx-font-weight: bolder;");
         kombiCol.setSortable(false);
-        		
         
         for (int i = 0; i < spielerAnzahl; i++) {
         	TableColumn<Punktewerte, Number> sp = new TableColumn<>();
         	final int index = i;
         	sp.setCellValueFactory(cell -> cell.getValue().punkteProperty(index));
+        	sp.setCellFactory(column -> {
+                return new TableCell<Punktewerte, Number>() {
+                	@Override
+                    protected void updateItem(Number item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item == null || empty) return;
+                        this.setText(item.toString());
+                        // Spalten Index - 1 weil 1. Spalte keine Punkte enthält
+                        int colIndex = tb.getColumns().indexOf(column)-1;
+                        // Zeilen Index +1 da die Kombis bei 1 anfangen
+                        int i = getIndex()+1;
+                        if (i < 14) {
+                        	System.out.println(pz[colIndex].istBelegt(i) + " index " +colIndex + "row" + i);
+                        	if (pz[colIndex].istBelegt(i)) {
+								this.setStyle("-fx-text-fill: black;");
+							} else	{
+								this.setStyle("-fx-text-fill: white;");
+							}
+						} else if (i == 14) {
+							this.setStyle("-fx-text-fill: white;");
+						} else {
+							this.setStyle("-fx-text-fill: black;");
+						}
+                        
+                    }
+                };
+            });
+        	
+            
         	sp.setText(spielerNamen[i]);
         	sp.setSortable(false);
         	tb.getColumns().add(sp);
 		}
         
+         
         
         for (String kombiBezeichnug : Kombi.bezeichnungen) {
 			data.add(new Punktewerte(kombiBezeichnug, spielerAnzahl));
@@ -75,7 +105,6 @@ public class Controller {
         
         tb.setItems(data);
         tb.getSelectionModel().clearSelection();
-
         
         updateInfo();
         
@@ -96,8 +125,12 @@ public class Controller {
 			}
 		}
 		ScaleTransition sc = new ScaleTransition(Duration.millis(500), im);
-		sc.setToX(0.5); sc.setToY(0.5);
-//		sc.play();
+		if (im.getEffect() != null) {
+			sc.setToX(1); sc.setToY(1);
+		} else {
+			sc.setToX(0.8); sc.setToY(0.8);			
+		}
+		sc.play();
 
 		//rt.playFromStart();
 		updateWürfel(w, false);
@@ -167,8 +200,7 @@ public class Controller {
 		if (index >= 13 || index < 0) {
 			return;
 		}
-		int spieler = spielerAktuell;
-		
+		int spieler = spielerAktuell;		
 		
 		int punkte = pz[spieler].punkteBerechen(index+1, w.getAlleWürfel());
 		data.get(index).punkteProperty(spieler).set(punkte);
@@ -178,6 +210,7 @@ public class Controller {
 			spielerAktuell++;
 			spielerAktuell = spielerAktuell%spielerAnzahl;
 			pz[spieler].eintragen(index+1, punkte);
+			updateTable(index);
 			updatePunkteSumme(spieler);
 			w = new Würfelbecher();
 			updateWurfButton();
