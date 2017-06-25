@@ -38,6 +38,7 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Kniffel");
+			primaryStage.getIcons().add(new Image("pictures/5.png"));
 			primaryStage.show();
 			
 		} catch(Exception e) {
@@ -72,6 +73,8 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			Stage stage = new Stage();
 			stage.setScene(scene);
+			stage.setTitle("Kniffel");
+			stage.getIcons().add(new Image("pictures/5.png"));
 			stage.show();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
