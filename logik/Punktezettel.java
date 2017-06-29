@@ -87,7 +87,6 @@ public class Punktezettel {
 	/**
 	 * Prüfung ob es sich um ein Full House handelt
 	 */
-	
 	private boolean check_FullHouse(byte[] sortierteWürfel) {
 		boolean FH1 =  (sortierteWürfel[0]) == (sortierteWürfel[1]) &&  (sortierteWürfel[2]) == (sortierteWürfel[3]) && (sortierteWürfel[2]) == (sortierteWürfel[4]) && (sortierteWürfel[1]) != (sortierteWürfel[2]);
 		boolean FH2 =  (sortierteWürfel[4]) == (sortierteWürfel[3]) &&  (sortierteWürfel[2]) == (sortierteWürfel[1]) && (sortierteWürfel[2]) == (sortierteWürfel[0]) && (sortierteWürfel[3]) != (sortierteWürfel[2]);
@@ -98,7 +97,6 @@ public class Punktezettel {
 	/**
 	 * Prüfung ob es sich um eine kleine Strasse handelt
 	 */
-	
 	private boolean check_KleineStraße(byte[] sortierteWürfel) {
 		byte[] eins = {1,2,3,4};
 		byte[] zwei = {2,3,4,5};
