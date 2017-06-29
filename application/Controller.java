@@ -47,6 +47,14 @@ public class Controller {
         	pz[i] = new Punktezettel();
         }
         
+        initTable();
+        
+        updateInfo();
+        updateSpielerCol();
+        
+    }
+    
+    private void initTable() {        
         TableColumn kombiCol = tb.getColumns().get(0);
         kombiCol.setMinWidth(100);
         kombiCol.setCellValueFactory(new PropertyValueFactory<Punktewerte, String>("Kombi"));
@@ -57,9 +65,11 @@ public class Controller {
         	TableColumn<Punktewerte, Number> sp = new TableColumn<>();
         	final int index = i;
         	sp.setCellValueFactory(cell -> cell.getValue().punkteProperty(index));
+        	
         	sp.setCellFactory(column -> {
                 return new TableCell<Punktewerte, Number>() {
-                	@Override
+                	 // CellFactory aktualisiert die Zellen der Tabelle, für den eigenen Style wird sie angepasst
+                	@Override                	
                     protected void updateItem(Number item, boolean empty) {
                         super.updateItem(item, empty);
                         if (item == null || empty) return;
@@ -82,14 +92,12 @@ public class Controller {
                         
                     }
                 };
-            });
-        	
+            });        	
             
         	sp.setText(spielerNamen[i]);
         	sp.setSortable(false);
         	tb.getColumns().add(sp);
-		}
-        
+		}       
          
         
         for (String kombiBezeichnug : Kombi.bezeichnungen) {
@@ -102,13 +110,10 @@ public class Controller {
         
         tb.setItems(data);
         tb.getSelectionModel().clearSelection();
-        
-        updateInfo();
-        updateSpielerCol();
-        
-    }
+
+	}
 	
-	@FXML
+	@FXML // Verabeitet Klicks auf die Würfel (links) zum markieren
 	protected void handleMouse(MouseEvent m){
 		ImageView im = (ImageView)m.getSource();
 		ImageView[] würfelViews = {w1, w2, w3, w4, w5};
@@ -126,28 +131,50 @@ public class Controller {
 		updateWürfel(w, false);
 		
 	}
-	private void rotate(Node node) {
-		RotateTransition rt = new RotateTransition(Duration.millis(500), node);
-		rt.setFromAngle(0);
-		rt.setToAngle(360);
-		rt.setAutoReverse(true);
-		rt.setCycleCount(1);
-		rt.setInterpolator(Interpolator.EASE_BOTH);
-		rt.play();
-		
-	}
 	
-	private void updateTable(int index) {
-		// JavaFX registriert das neue setzen des Objekts in der Liste
-		data.set(index, data.get(index));
-	}
-	
-	@FXML
+	@FXML // Verarbeitet Klicks auf den Würfeln Button
 	protected void handleWurf(MouseEvent m){
 		w.würfeln();
 		updateWürfel(w, true);
 		updateWurfButton();
-
+		
+	}
+	
+	@FXML // Verarbeitet alle Klicks auf die Punktetabelle
+	protected void handleTableClick(MouseEvent m) {
+		int index = tb.getSelectionModel().getSelectedIndex();
+		// Kombi Felder sind nur der obere Teil < 14
+		if (index >= 13 || index < 0) {
+			return;
+		}
+		int spieler = spielerAktuell;
+		// Nichts tun wenn Feld schon belegt
+		if (pz[spieler].istBelegt(index+1)) return;
+		
+		int punkte = pz[spieler].punkteBerechen(index+1, w.getAlleWürfel());
+		data.get(index).punkteProperty(spieler).set(punkte);
+		// Bei Doppelclick wird eingetragen, ansonsten nur Punkte berechnet
+		if (m.getClickCount() > 1) {
+			tb.getSelectionModel().clearSelection();
+			spielerAktuell++;
+			spielerAktuell = spielerAktuell%spielerAnzahl;
+			pz[spieler].eintragen(index+1, punkte);
+			updateSpielerCol();
+			updateTable(index);
+			updatePunkteSumme(spieler);
+			w = new Würfelbecher();
+			updateWurfButton();
+			updateWürfel(w, true);
+			updateInfo();
+		}
+		
+		
+	}
+	
+	
+	private void updateTable(int index) {
+		// JavaFX registriert das neue setzen des Objekts in der Liste
+		data.set(index, data.get(index));
 	}
 	
 	private void updateWurfButton() {
@@ -178,48 +205,7 @@ public class Controller {
 			if(!w.istWürfelMarkiert(i) && animate) rotate(würfelViews[i]);
 		}
 	}
-	
-	private void würfelMarkiertEffect(Node n, boolean markiert) {
-		ScaleTransition sc = new ScaleTransition(Duration.millis(200), n);
-		if (!markiert) {
-			sc.setToX(1); sc.setToY(1);
-		} else {
-			sc.setToX(0.8); sc.setToY(0.8);			
-		}
-		sc.play();
-	}
 
-	
-	@FXML
-	protected void handleTableClick(MouseEvent m) {
-		int index = tb.getSelectionModel().getSelectedIndex();
-		// Kombi Felder sind nur der obere Teil < 14
-		if (index >= 13 || index < 0) {
-			return;
-		}
-		int spieler = spielerAktuell;
-		// Nichts tun wenn Feld schon belegt
-		if (pz[spieler].istBelegt(index+1)) return;
-		
-		int punkte = pz[spieler].punkteBerechen(index+1, w.getAlleWürfel());
-		data.get(index).punkteProperty(spieler).set(punkte);
-		// Bei Doppelclick wird eingetragen, ansonsten nur Punkte berechnet
-		if (m.getClickCount() > 1) {
-			tb.getSelectionModel().clearSelection();
-			spielerAktuell++;
-			spielerAktuell = spielerAktuell%spielerAnzahl;
-			pz[spieler].eintragen(index+1, punkte);
-			updateSpielerCol();
-			updateTable(index);
-			updatePunkteSumme(spieler);
-			w = new Würfelbecher();
-			updateWurfButton();
-			updateWürfel(w, true);
-			updateInfo();
-		}
-		
-		
-	}
 	private void updateSpielerCol() {
 		for (int i = 0; i < spielerAnzahl; i++) {
 			if (i == spielerAktuell) {
@@ -233,11 +219,33 @@ public class Controller {
 	private void updateInfo() {
 		infoLbl.setText(spielerNamen[spielerAktuell] + "  ist am Zug!");
 	}
-	
+
 	private void updatePunkteSumme(int spieler) {
 		data.get(14).punkteProperty(spieler).set(pz[spieler].calcObererBlock());
 		data.get(15).punkteProperty(spieler).set(pz[spieler].calcUntererBlock());
 		data.get(16).punkteProperty(spieler).set(pz[spieler].getGesamtPkt());
+	}
+	
+	
+	private void würfelMarkiertEffect(Node n, boolean markiert) {
+		ScaleTransition sc = new ScaleTransition(Duration.millis(200), n);
+		if (!markiert) {
+			sc.setToX(1); sc.setToY(1);
+		} else {
+			sc.setToX(0.8); sc.setToY(0.8);			
+		}
+		sc.play();
+	}	
+	
+	private void rotate(Node node) {
+		RotateTransition rt = new RotateTransition(Duration.millis(500), node);
+		rt.setFromAngle(0);
+		rt.setToAngle(360);
+		rt.setAutoReverse(true);
+		rt.setCycleCount(1);
+		rt.setInterpolator(Interpolator.EASE_BOTH);
+		rt.play();
+		
 	}
 	
 

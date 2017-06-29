@@ -23,6 +23,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			// Zeigt zuerst die Spielereingabe
 			Pane root = (Pane)FXMLLoader.load(getClass().getResource("Start.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
