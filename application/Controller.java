@@ -13,8 +13,6 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.effect.Effect;
-import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -71,7 +69,6 @@ public class Controller {
                         // Zeilen Index +1 da die Kombis bei 1 anfangen
                         int i = getIndex()+1;
                         if (i < 14) {
-                        	System.out.println(pz[colIndex].istBelegt(i) + " index " +colIndex + "row" + i);
                         	if (pz[colIndex].istBelegt(i)) {
                         		this.getStyleClass().add("belegt");
 							} else	{
@@ -147,7 +144,6 @@ public class Controller {
 	
 	@FXML
 	protected void handleWurf(MouseEvent m){
-		//ImageView im = (ImageView)m.getSource();
 		w.würfeln();
 		updateWürfel(w, true);
 		updateWurfButton();
@@ -177,9 +173,7 @@ public class Controller {
 			} catch (ArrayIndexOutOfBoundsException e) {
 				würfelViews[i].setImage(new Image("pictures/gr.png"));
 			}
-			
-//			Effect effect = wb.istWürfelMarkiert(i)? new GaussianBlur() : null;
-//			würfelViews[i].setEffect(effect);
+
 			würfelMarkiertEffect(würfelViews[i], wb.istWürfelMarkiert(i));
 			if(!w.istWürfelMarkiert(i) && animate) rotate(würfelViews[i]);
 		}
@@ -198,7 +192,6 @@ public class Controller {
 	
 	@FXML
 	protected void handleTableClick(MouseEvent m) {
-//		System.out.println(tb.getSelectionModel().getSelectedIndex());
 		int index = tb.getSelectionModel().getSelectedIndex();
 		// Kombi Felder sind nur der obere Teil < 14
 		if (index >= 13 || index < 0) {

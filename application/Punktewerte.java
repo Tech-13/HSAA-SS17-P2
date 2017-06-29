@@ -2,14 +2,10 @@ package application;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleSetProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
 public class Punktewerte {
 	private String kombi;
 	private IntegerProperty[] punkte;
-	private int spielerAnzahl = 3;
 	
 	public Punktewerte(String pKombi, int spieler) {
 		this.kombi = (pKombi);
