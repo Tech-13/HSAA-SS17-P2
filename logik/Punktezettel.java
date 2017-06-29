@@ -1,8 +1,10 @@
+package logik;
+
  
-import java.util.*;
+import java.util.Arrays;
 
 /**
- * 
+ * Gesamte Punktewerte für einen Spieler
  */
 public class Punktezettel {
 
@@ -198,7 +200,7 @@ public class Punktezettel {
 		}
 		return punkte;
 	}
-	
+
 	/**
 	 * @return Gesamtpunkte (evtl. inkl. Bonus)
 	 */
