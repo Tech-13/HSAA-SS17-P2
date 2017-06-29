@@ -1,4 +1,4 @@
-package logik;
+ 
 import java.util.*;
 
 /**
@@ -83,12 +83,22 @@ public class Punktezettel {
 		return sum;
 	}
 
+	
+	/**
+	 * Prüfung ob es sich um ein Full House handelt
+	 */
+	
 	private boolean check_FullHouse(byte[] sortierteWürfel) {
 		boolean FH1 =  (sortierteWürfel[0]) == (sortierteWürfel[1]) &&  (sortierteWürfel[2]) == (sortierteWürfel[3]) && (sortierteWürfel[2]) == (sortierteWürfel[4]) && (sortierteWürfel[1]) != (sortierteWürfel[2]);
 		boolean FH2 =  (sortierteWürfel[4]) == (sortierteWürfel[3]) &&  (sortierteWürfel[2]) == (sortierteWürfel[1]) && (sortierteWürfel[2]) == (sortierteWürfel[0]) && (sortierteWürfel[3]) != (sortierteWürfel[2]);
 		return FH1 || FH2;
 	}
 
+	
+	/**
+	 * Prüfung ob es sich um eine kleine Strasse handelt
+	 */
+	
 	private boolean check_KleineStraße(byte[] sortierteWürfel) {
 		byte[] eins = {1,2,3,4};
 		byte[] zwei = {2,3,4,5};
@@ -100,12 +110,20 @@ public class Punktezettel {
 		boolean str2 = Arrays.equals(ende, eins) || Arrays.equals(ende, zwei) || Arrays.equals(ende, drei);
 		return str1 || str2;
 	}
+	
+	/**
+	 * Prüfung ob es sich um eine großeStrasse handelt
+	 */
 	private boolean check_GroßeStraße(byte[] sortierteWürfel) {
 		byte[] eins = {1,2,3,4,5};
 		byte[] zwei = {2,3,4,5,6};
 		return Arrays.equals(sortierteWürfel, eins) || Arrays.equals(sortierteWürfel, zwei);
 	}
 
+	
+	/**
+	 * Prüfung ob es sich um einen 3er Pasch handelt
+	 */
 	private boolean check_Pasch3(byte[] sortierteWürfel) {
 		boolean P31 = (sortierteWürfel[4]) == (sortierteWürfel[3]) && (sortierteWürfel[3]) == (sortierteWürfel[2]);
 		boolean P32 = (sortierteWürfel[3]) == (sortierteWürfel[2]) && (sortierteWürfel[2]) == (sortierteWürfel[1]);
@@ -113,12 +131,18 @@ public class Punktezettel {
 		return P31 || P32 || P33;
 	}
 
+	/**
+	 * Prüfung ob es sich um einen 4er Pasch handelt
+	 */
 	private boolean check_Pasch4(byte[] sortierteWürfel) {
 		boolean P41 = (sortierteWürfel[4]) == (sortierteWürfel[3]) && (sortierteWürfel[3]) == (sortierteWürfel[2]) && (sortierteWürfel[2]) == (sortierteWürfel[1]);
 		boolean P42 = (sortierteWürfel[0]) == (sortierteWürfel[1]) && (sortierteWürfel[1]) == (sortierteWürfel[2]) && (sortierteWürfel[2]) == (sortierteWürfel[3]); 
 		return P41 || P42;
 	}
 
+	/**
+	 * Prüfung ob es sich um einen Kniffel handelt
+	 */
 	private boolean check_Pasch5(byte[] sortierteWürfel) {
 		if (sortierteWürfel[4] == 0) {
 			return false;
@@ -176,6 +200,7 @@ public class Punktezettel {
 		}
 		return punkte;
 	}
+	
 	/**
 	 * @return Gesamtpunkte (evtl. inkl. Bonus)
 	 */
